@@ -1,0 +1,1953 @@
+/*
+   * Flattens a rule set into valid CSS
+   * Hashes it, wraps the whole chunk in a .hash1234 {}
+   * Returns the hash to be injected on render()
+   * */
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+*/
+
+/*
+  connect is a facade over connectAdvanced. It turns its args into a compatible
+  selectorFactory, which has the signature:
+
+    (dispatch, options) => (nextState, nextOwnProps) => nextFinalProps
+  
+  connect passes its args to connectAdvanced as options, which will in turn pass them to
+  selectorFactory each time a Connect component instance is instantiated or hot reloaded.
+
+  selectorFactory returns a final props selector from its mapStateToProps,
+  mapStateToPropsFactories, mapDispatchToProps, mapDispatchToPropsFactories, mergeProps,
+  mergePropsFactories, and pure args.
+
+  The resulting final props selector is called by the Connect component instance whenever
+  it receives new props or store state.
+ */
+
+/*
+  selectorFactory is a func that is responsible for returning the selector function used to
+  compute new props from state, props, and dispatch. For example:
+      export default connectAdvanced((dispatch, options) => (state, props) => ({
+      thing: state.things[props.thingId],
+      saveThing: fields => dispatch(actionCreators.saveThing(props.thingId, fields)),
+    }))(YourComponent)
+    Access to dispatch is provided to the factory so selectorFactories can bind actionCreators
+  outside of their selector as an optimization. Options passed to connectAdvanced are passed to
+  the selectorFactory, along with displayName and WrappedComponent, as the second argument.
+    Note that selectorFactory is responsible for all caching/memoization of inbound and outbound
+  props. Do not use connectAdvanced directly without memoizing results between calls to your
+  selector, otherwise the Connect component will re-render on every state or props change.
+*/
+
+/*
+ * This is a dummy function to check if the function name has been altered by minification.
+ * If the function has been minified and NODE_ENV !== 'production', warn the user.
+ */
+
+/*
+ ComponentStyle is all the CSS-specific stuff, not
+ the React-specific stuff.
+ */
+
+/*
+ Modernizr 3.0.0pre (Custom Build) | MIT
+*/
+
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+/* 0 */
+
+/* 1 */
+
+/* 10 */
+
+/* 11 */
+
+/* 12 */
+
+/* 13 */
+
+/* 14 */
+
+/* 15 */
+
+/* 16 */
+
+/* 17 */
+
+/* 18 */
+
+/* 19 */
+
+/* 2 */
+
+/* 20 */
+
+/* 21 */
+
+/* 22 */
+
+/* 23 */
+
+/* 24 */
+
+/* 25 */
+
+/* 26 */
+
+/* 27 */
+
+/* 28 */
+
+/* 29 */
+
+/* 3 */
+
+/* 30 */
+
+/* 31 */
+
+/* 32 */
+
+/* 33 */
+
+/* 34 */
+
+/* 35 */
+
+/* 36 */
+
+/* 37 */
+
+/* 38 */
+
+/* 39 */
+
+/* 4 */
+
+/* 40 */
+
+/* 41 */
+
+/* 42 */
+
+/* 43 */
+
+/* 44 */
+
+/* 45 */
+
+/* 46 */
+
+/* 47 */
+
+/* 48 */
+
+/* 49 */
+
+/* 5 */
+
+/* 50 */
+
+/* 51 */
+
+/* 52 */
+
+/* 53 */
+
+/* 54 */
+
+/* 55 */
+
+/* 56 */
+
+/* 57 */
+
+/* 58 */
+
+/* 59 */
+
+/* 6 */
+
+/* 60 */
+
+/* 61 */
+
+/* 62 */
+
+/* 63 */
+
+/* 64 */
+
+/* 65 */
+
+/* 66 */
+
+/* 67 */
+
+/* 68 */
+
+/* 69 */
+
+/* 7 */
+
+/* 8 */
+
+/* 9 */
+
+/* @import rules are reordered to appear first */
+
+/* Append to target when no previous element was passed */
+
+/* Either execute or defer the function */
+
+/* Firefox quirk requires us to step through all stylesheets to find one owned by the given tag */
+
+/* Handle objects */
+
+/* Handle other components */
+
+/* If config methods are called, wrap up a new template function and merge options */
+
+/* Insert new style tag after the previous one */
+
+/* Modify/inject new props at runtime */
+
+/* NOTE: This is just for backwards-compatibility with jest-styled-components */
+
+/* Remove sealed StyleSheets from the master sheet */
+
+/* The master sheet might be reset, so keep a reference here */
+
+/* These are helpers for the StyleTags to keep track of the injected
+ * rule names for each (component) ID that they're keeping track of.
+ * They're crucial for detecting whether a name has already been
+ * injected.
+ * (This excludes rehydrated names) */
+
+/* This is callable directly as a template function */
+
+/* This is the "capacity" of our alphabet i.e. 2x26 for all letters plus their capitalised
+ * counterparts */
+
+/* WEBPACK VAR INJECTION */
+
+/* We depend on components having unique IDs */
+
+/* Work around insertRule quirk in EdgeHTML */
+
+/* Z+1 */
+
+/* a list of tags belonging to this StyleSheet */
+
+/* a map from ids to tags */
+
+/* a tag for import rules */
+
+/* abort early if cssRule string is falsy */
+
+/* abort rehydration if no previous style tags were found */
+
+/* abort rehydration if nothing was extracted */
+
+/* add all extracted components to the new tag */
+
+/* add deferred rules for component */
+
+/* add rehydrated name to sheet to avoid re-adding styles */
+
+/* add to clone array */
+
+/* add up no of injected rules */
+
+/* adds "children" to the StyleSheet that inherit all of the parents' rules
+   * while their own rules do not affect the parent */
+
+/* adds a new ID:name pairing to a names dictionary */
+
+/* any error indicates an invalid rule */
+
+/* caching layer checking id+name to already have a corresponding tag and injected rules */
+
+/* check if style tag is a streamed tag */
+
+/* children (aka clones) of this StyleSheet inheriting all and future injections */
+
+/* clone all tags */
+
+/* clone other maps */
+
+/* combines hashStr (murmurhash) and nameGenerator for convenience */
+
+/* create a tag to be used for rehydration */
+
+/* create new empty text node and replace the current one */
+
+/* current capacity until a new tag must be created */
+
+/* deferred rules for a given id */
+
+/* delete possible deferred rules */
+
+/* don't inject when the id is already registered */
+
+/* eslint-disable camelcase, no-undef */
+
+/* eslint-disable guard-for-in */
+
+/* eslint-disable import/no-unresolved */
+
+/* eslint-disable no-bitwise */
+
+/* eslint-disable no-unused-vars */
+
+/* eslint-disable react/prop-types, flowtype-errors/show-errors */
+
+/* eslint-enable */
+
+/* exception for rehydrated names which are checked separately */
+
+/* extract all components and their CSS */
+
+/* fail silently */
+
+/* force StyleSheet to create a new tag on the next injection */
+
+/* get a char and divide by alphabet-length */
+
+/* get a tag for a given componentId, assign the componentId to one, or shard */
+
+/* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */
+
+/* harmony default export */
+
+/* harmony export (binding) */
+
+/* harmony import */
+
+/* ignore possible rehydrated names */
+
+/* in speedy mode we can keep a lot more rules in a sheet before a slowdown can be expected */
+
+/* injects rules for a given id with a name that will need to be cached */
+
+/* input a number, usually a hash and convert it to base-52 */
+
+/* istanbul ignore if  */
+
+/* istanbul ignore next  */
+
+/* mainly for createGlobalStyle to check for its id */
+
+/* n */
+
+/* o */
+
+/* reconstruct tagMap */
+
+/* registers a componentId and registers it on its tag */
+
+/* rehydrate all SSR'd style tags */
+
+/* remove all rules from the tag */
+
+/* remove old HTMLStyleElements, since they have been rehydrated */
+
+/* removes all rules for a given id, which doesn't remove its marker but resets it */
+
+/* reset capacity and adjust MAX_SIZE by the initial size of the rehydration */
+
+/* reset the internal "master" instance */
+
+/* retrieve a "master" instance of StyleSheet which is typically used when no other is available
+   * The master StyleSheet is targeted by createGlobalStyle, keyframes, and components outside of any
+    * StyleSheetManager's context */
+
+/* retrieve all component ids */
+
+/* retrieve all component names */
+
+/* shard (create a new tag) if the tag is exhausted (See MAX_SIZE) */
+
+/* simply return a tag, when the componentId was already assigned one */
+
+/* start at 75 for 'a' until 'z' (25) and then start at 65 for capitalised letters */
+
+/* store original HTMLStyleElement */
+
+/* this is used for not reinjecting rules via hasNameForId() */
+
+/* unused harmony export ServerStyleSheet */
+
+/* unused harmony export StyleSheetConsumer */
+
+/* unused harmony export StyleSheetContext */
+
+/* unused harmony export StyleSheetManager */
+
+/* unused harmony export ThemeConsumer */
+
+/* unused harmony export ThemeContext */
+
+/* unused harmony export __DO_NOT_USE_OR_YOU_WILL_BE_HAUNTED_BY_SPOOKY_GHOSTS */
+
+/* unused harmony export css */
+
+/* unused harmony export isStyledComponent */
+
+/* unused harmony export keyframes */
+
+/* unused harmony export withTheme */
+
+/* use insertRule and cap passed index with maxIndex (no of cssRules) */
+
+/* we should always be able to find a tag */
+
+/* when rules for an id are removed using remove() we have to ignore rehydratedNames for it */
+
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
+
+/*#__PURE__*/
+
+/**
+       * Depending on the order "render" is called this can cause the styles to be lost
+       * until the next render pass of the remaining instance, which may
+       * not be immediate.
+       */
+
+/**
+       * The minimal observable subscription method.
+       * @param {Object} observer Any object that can be used as an observer.
+       * The observer object should have a `next` method.
+       * @returns {subscription} An object with an `unsubscribe` method that can
+       * be used to unsubscribe the observable from the store, and prevent further
+       * emission of values from the observable.
+       */
+
+/**
+       * This fixes HMR compatibility. Don't ask me why, but this combination of
+       * caching the closure variables via statics and then persisting the statics in
+       * state works across HMR where no other combination did. ¯\_(ツ)_/¯
+       */
+
+/**
+   * @return {null}
+   */
+
+/**
+   * A POP indicates a change to an arbitrary index in the history stack, such
+   * as a back or forward navigation. It does not describe the direction of the
+   * navigation, only that the current index changed.
+   *
+   * Note: This is the default action for newly created history objects.
+   */
+
+/**
+   * A PUSH indicates a new entry being added to the history stack, such as when
+   * a link is clicked and a new page loads. When this happens, all subsequent
+   * entries in the stack are lost.
+   */
+
+/**
+   * A REPLACE indicates the entry at the current index in the history stack
+   * being replaced by a new one.
+   */
+
+/**
+   * Adds a change listener. It will be called any time an action is dispatched,
+   * and some part of the state tree may potentially have changed. You may then
+   * call `getState()` to read the current state tree inside the callback.
+   *
+   * You may call `dispatch()` from a change listener, with the following
+   * caveats:
+   *
+   * 1. The subscriptions are snapshotted just before every `dispatch()` call.
+   * If you subscribe or unsubscribe while the listeners are being invoked, this
+   * will not have any effect on the `dispatch()` that is currently in progress.
+   * However, the next `dispatch()` call, whether nested or not, will use a more
+   * recent snapshot of the subscription list.
+   *
+   * 2. The listener should not expect to see all state changes, as the state
+   * might have been updated multiple times during a nested `dispatch()` before
+   * the listener is called. It is, however, guaranteed that all subscribers
+   * registered before the `dispatch()` started will be called with the latest
+   * state by the time it exits.
+   *
+   * @param {Function} listener A callback to be invoked on every dispatch.
+   * @returns {Function} A function to remove this change listener.
+   */
+
+/**
+   * Dispatches an action. It is the only way to trigger a state change.
+   *
+   * The `reducer` function, used to create the store, will be called with the
+   * current state tree and the given `action`. Its return value will
+   * be considered the **next** state of the tree, and the change listeners
+   * will be notified.
+   *
+   * The base implementation only supports plain object actions. If you want to
+   * dispatch a Promise, an Observable, a thunk, or something else, you need to
+   * wrap your store creating function into the corresponding middleware. For
+   * example, see the documentation for the `redux-thunk` package. Even the
+   * middleware will eventually dispatch plain object actions using this method.
+   *
+   * @param {Object} action A plain object representing “what changed”. It is
+   * a good idea to keep actions serializable so you can record and replay user
+   * sessions, or use the time travelling `redux-devtools`. An action must have
+   * a `type` property which may not be `undefined`. It is a good idea to use
+   * string constants for action types.
+   *
+   * @returns {Object} For convenience, the same action object you dispatched.
+   *
+   * Note that, if you use a custom middleware, it may wrap `dispatch()` to
+   * return something else (for example, a Promise you can await).
+   */
+
+/**
+   * Get the theme from the props, supporting both (outerTheme) => {}
+   * as well as object notation
+   */
+
+/**
+   * Interoperability point for observable/reactive libraries.
+   * @returns {observable} A minimal observable of state changes.
+   * For more information, see the observable proposal:
+   * https://github.com/tc39/proposal-observable
+   */
+
+/**
+   * Mark the ServerStyleSheet as being fully emitted and manually GC it from the
+   * StyleSheet singleton.
+   */
+
+/**
+   * Reads the state tree managed by the store.
+   *
+   * @returns {any} The current state tree of your application.
+   */
+
+/**
+   * Replaces the reducer currently used by the store to calculate the state.
+   *
+   * You might need this if your app implements code splitting and you want to
+   * load some of the reducers dynamically. You might also need this if you
+   * implement a hot reloading mechanism for Redux.
+   *
+   * @param {Function} nextReducer The reducer for the store to use instead.
+   * @returns {void}
+   */
+
+/**
+   * This ensures uniqueness if two components happen to share
+   * the same displayName.
+   */
+
+/**
+   * This makes a shallow copy of currentListeners so we can use
+   * nextListeners as a temporary list while dispatching.
+   *
+   * This prevents any bugs around consumers calling
+   * subscribe/unsubscribe in the middle of a dispatch.
+   */
+
+/**
+ * @deprecated
+ *
+ * **We recommend using the `configureStore` method
+ * of the `@reduxjs/toolkit` package**, which replaces `createStore`.
+ *
+ * Redux Toolkit is our recommended approach for writing Redux logic today,
+ * including store setup, reducers, data fetching, and more.
+ *
+ * **For more details, please read this Redux docs page:**
+ * **https://redux.js.org/introduction/why-rtk-is-redux-today**
+ *
+ * `configureStore` from Redux Toolkit is an improved version of `createStore` that
+ * simplifies setup and helps avoid common bugs.
+ *
+ * You should not be using the `redux` core package by itself today, except for learning purposes.
+ * The `createStore` method from the core `redux` package will not be removed, but we encourage
+ * all users to migrate to using Redux Toolkit for all Redux code.
+ *
+ * If you want to use `createStore` without this visual deprecation warning, use
+ * the `legacy_createStore` import instead:
+ *
+ * `import { legacy_createStore as createStore} from 'redux'`
+ *
+ */
+
+/**
+ * @param {any} obj The object to inspect.
+ * @returns {boolean} True if the argument appears to be a plain object.
+ */
+
+/**
+ * A <Router> that stores all entries in memory.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#memoryrouter
+ */
+
+/**
+ * A PathPattern is used to match on some portion of a URL pathname.
+ */
+
+/**
+ * A RouteMatch contains info about how a route matched a URL.
+ */
+
+/**
+ * A `<Router>` for use in web browsers. Stores the location in the hash
+ * portion of the URL so it is not sent to the server.
+ */
+
+/**
+ * A `<Router>` that accepts a pre-instantiated history object. It's important
+ * to note that using your own history object is highly discouraged and may add
+ * two versions of the history library to your bundles unless you use the same
+ * version of the history library that React Router uses internally.
+ */
+
+/**
+ * A container for a nested tree of <Route> elements that renders the branch
+ * that best matches the current location.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#routes
+ */
+
+/**
+ * A convenient wrapper for reading and writing search parameters via the
+ * URLSearchParams interface.
+ */
+
+/**
+ * A hook to access the redux `dispatch` function.
+ *
+ * @returns {any|function} redux store's `dispatch` function
+ *
+ * @example
+ *
+ * import React, { useCallback } from 'react'
+ * import { useDispatch } from 'react-redux'
+ *
+ * export const CounterComponent = ({ value }) => {
+ *   const dispatch = useDispatch()
+ *   const increaseCounter = useCallback(() => dispatch({ type: 'increase-counter' }), [])
+ *   return (
+ *     <div>
+ *       <span>{value}</span>
+ *       <button onClick={increaseCounter}>Increase counter</button>
+ *     </div>
+ *   )
+ * }
+ */
+
+/**
+ * A hook to access the redux store's state. This hook takes a selector function
+ * as an argument. The selector is called with the store state.
+ *
+ * This hook takes an optional equality comparison function as the second parameter
+ * that allows you to customize the way the selected state is compared to determine
+ * whether the component needs to be re-rendered.
+ *
+ * @param {Function} selector the selector function
+ * @param {Function=} equalityFn the function that will be used to determine equality
+ *
+ * @returns {any} the selected state
+ *
+ * @example
+ *
+ * import React from 'react'
+ * import { useSelector } from 'react-redux'
+ *
+ * export const CounterComponent = () => {
+ *   const counter = useSelector(state => state.counter)
+ *   return <div>{counter}</div>
+ * }
+ */
+
+/**
+ * A hook to access the redux store.
+ *
+ * @returns {any} the redux store
+ *
+ * @example
+ *
+ * import React from 'react'
+ * import { useStore } from 'react-redux'
+ *
+ * export const ExampleComponent = () => {
+ *   const store = useStore()
+ *   return <div>{store.getState()}</div>
+ * }
+ */
+
+/**
+ * A hook to access the value of the `ReactReduxContext`. This is a low-level
+ * hook that you should usually not need to call directly.
+ *
+ * @returns {any} the value of the `ReactReduxContext`
+ *
+ * @example
+ *
+ * import React from 'react'
+ * import { useReduxContext } from 'react-redux'
+ *
+ * export const CounterComponent = ({ value }) => {
+ *   const { store } = useReduxContext()
+ *   return <div>{store.getState()}</div>
+ * }
+ */
+
+/**
+ * Adapted from React: https://github.com/facebook/react/blob/master/packages/shared/formatProdErrorMessage.js
+ *
+ * Do not require this module directly! Use normal throw error calls. These messages will be replaced with error codes
+ * during build.
+ * @param {number} code
+ */
+
+/**
+ * Composes single-argument functions from right to left. The rightmost
+ * function can take multiple arguments as it provides the signature for
+ * the resulting composite function.
+ *
+ * @param {...Function} funcs The functions to compose.
+ * @returns {Function} A function obtained by composing the argument functions
+ * from right to left. For example, compose(f, g, h) is identical to doing
+ * (...args) => f(g(h(...args))).
+ */
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/**
+ * Copyright 2015, Yahoo! Inc.
+ * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+ */
+
+/**
+ * Create an error file out of errors.md for development and a simple web link to the full errors
+ * in production mode.
+ */
+
+/**
+ * Creates a Redux store that holds the state tree.
+ *
+ * **We recommend using `configureStore` from the
+ * `@reduxjs/toolkit` package**, which replaces `createStore`:
+ * **https://redux.js.org/introduction/why-rtk-is-redux-today**
+ *
+ * The only way to change the data in the store is to call `dispatch()` on it.
+ *
+ * There should only be a single store in your app. To specify how different
+ * parts of the state tree respond to actions, you may combine several reducers
+ * into a single reducer function by using `combineReducers`.
+ *
+ * @param {Function} reducer A function that returns the next state tree, given
+ * the current state tree and the action to handle.
+ *
+ * @param {any} [preloadedState] The initial state. You may optionally specify it
+ * to hydrate the state from the server in universal apps, or to restore a
+ * previously serialized user session.
+ * If you use `combineReducers` to produce the root reducer function, this must be
+ * an object with the same shape as `combineReducers` keys.
+ *
+ * @param {Function} [enhancer] The store enhancer. You may optionally specify it
+ * to enhance the store with third-party capabilities such as middleware,
+ * time travel, persistence, etc. The only store enhancer that ships with Redux
+ * is `applyMiddleware()`.
+ *
+ * @returns {Store} A Redux store that lets you read the state, dispatch actions
+ * and subscribe to changes.
+ */
+
+/**
+ * Creates a route config from a React "children" object, which is usually
+ * either a `<Route>` element or an array of them. Used internally by
+ * `<Routes>` to create a route config from its children.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#createroutesfromchildren
+ */
+
+/**
+ * Creates a store enhancer that applies middleware to the dispatch method
+ * of the Redux store. This is handy for a variety of tasks, such as expressing
+ * asynchronous actions in a concise manner, or logging every action payload.
+ *
+ * See `redux-thunk` package as an example of the Redux middleware.
+ *
+ * Because middleware is potentially asynchronous, this should be the first
+ * store enhancer in the composition chain.
+ *
+ * Note that each middleware will be given the `dispatch` and `getState` functions
+ * as named arguments.
+ *
+ * @param {...Function} middlewares The middleware chain to be applied.
+ * @returns {Function} A store enhancer applying the middleware.
+ */
+
+/**
+ * Creates a string URL path from the given pathname, search, and hash components.
+ *
+ * @see https://github.com/remix-run/history/tree/main/docs/api-reference.md#createpath
+ */
+
+/**
+ * Declares an element that should be rendered at a certain URL path.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#route
+ */
+
+/**
+ * Handles the click behavior for router `<Link>` components. This is useful if
+ * you need to create custom `<Link>` components with the same click behavior we
+ * use in our exported `<Link>`.
+ */
+
+/**
+ * Hash history stores the location in window.location.hash. This makes it ideal
+ * for situations where you don't want to send the location to the server for
+ * some reason, either because you do cannot configure it or the URL space is
+ * reserved for something else.
+ *
+ * @see https://github.com/remix-run/history/tree/main/docs/api-reference.md#createhashhistory
+ */
+
+/**
+ * Hook factory, which creates a `useDispatch` hook bound to a given context.
+ *
+ * @param {React.Context} [context=ReactReduxContext] Context passed to your `<Provider>`.
+ * @returns {Function} A `useDispatch` hook bound to the specified context.
+ */
+
+/**
+ * Hook factory, which creates a `useSelector` hook bound to a given context.
+ *
+ * @param {React.Context} [context=ReactReduxContext] Context passed to your `<Provider>`.
+ * @returns {Function} A `useSelector` hook bound to the specified context.
+ */
+
+/**
+ * Hook factory, which creates a `useStore` hook bound to a given context.
+ *
+ * @param {React.Context} [context=ReactReduxContext] Context passed to your `<Provider>`.
+ * @returns {Function} A `useStore` hook bound to the specified context.
+ */
+
+/**
+ * Hyphenates a camelcased CSS property name, for example:
+ *
+ *   > hyphenateStyleName('backgroundColor')
+ *   < "background-color"
+ *   > hyphenateStyleName('MozTransition')
+ *   < "-moz-transition"
+ *   > hyphenateStyleName('msTransition')
+ *   < "-ms-transition"
+ *
+ * As Modernizr suggests (http://modernizr.com/docs/#prefixed), an `ms` prefix
+ * is converted to `-ms-`.
+ *
+ * @param {string} string
+ * @return {string}
+ */
+
+/**
+ * It's falsish not falsy because 0 is allowed.
+ */
+
+/**
+ * Matches the given routes to a location and returns the match data.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#matchroutes
+ */
+
+/**
+ * Memory history stores the current location in memory. It is designed for use
+ * in stateful non-browser environments like tests and React Native.
+ *
+ * @see https://github.com/remix-run/history/tree/main/docs/api-reference.md#creatememoryhistory
+ */
+
+/**
+ * Merge anything recursively.
+ * Objects get merged, special objects (classes etc.) are re-assigned "as is".
+ * Basic types overwrite objects or other basic types.
+ *
+ * @param {(IConfig | any)} origin
+ * @param {...any[]} newComers
+ * @returns the result
+ */
+
+/**
+ * Parses a string URL path into its separate pathname, search, and hash components.
+ *
+ * @see https://github.com/remix-run/history/tree/main/docs/api-reference.md#parsepath
+ */
+
+/**
+ * Performs pattern matching on a URL pathname and returns information about
+ * the match.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#matchpath
+ */
+
+/**
+ * Provides location context for the rest of the app.
+ *
+ * Note: You usually won't render a <Router> directly. Instead, you'll render a
+ * router that is more specific to your environment such as a <BrowserRouter>
+ * in web browsers or a <StaticRouter> for server rendering.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#router
+ */
+
+/**
+ * React Router DOM v6.3.0
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+
+/**
+ * React Router v6.3.0
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+
+/**
+ * Renders the result of `matchRoutes()` into a React element.
+ */
+
+/**
+ * Resolves the pathname of the given `to` value against the current location.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#useresolvedpath
+ */
+
+/**
+ * Returns a resolved path object relative to the given pathname.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#resolvepath
+ */
+
+/**
+ * Returns an imperative method for changing the location. Used by <Link>s, but
+ * may also be used by other elements to change the location.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#usenavigate
+ */
+
+/**
+ * Returns the current location object, which represents the current URL in web
+ * browsers.
+ *
+ * Note: If you're using this it may mean you're doing some of your own
+ * "routing" in your app, and we'd like to know what your use case is. We may
+ * be able to provide something higher-level to better suit your needs.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#uselocation
+ */
+
+/**
+ * Returns the current navigation action which describes how the router came to
+ * the current location, either by a pop, push, or replace on the history stack.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#usenavigationtype
+ */
+
+/**
+ * Returns the element of the route that matched the current location, prepared
+ * with the correct context to render the remainder of the route tree. Route
+ * elements in the tree must render an <Outlet> to render their child route's
+ * element.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#useroutes
+ */
+
+/**
+ * Returns the full href for the given "to" value. This is useful for building
+ * custom links that are also accessible and preserve right-click behavior.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#usehref
+ */
+
+/**
+ * Returns the object type of the given payload
+ *
+ * @param {*} payload
+ * @returns {string}
+ */
+
+/**
+ * Returns true if this component is a descendant of a <Router>.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#useinroutercontext
+ */
+
+/**
+ * Returns true whether the payload is null or undefined
+ *
+ * @param {*} payload
+ * @returns {(payload is null | undefined)}
+ */
+
+/**
+ * Returns whether the payload is a Date, and that the date is valid
+ *
+ * @param {*} payload
+ * @returns {payload is Date}
+ */
+
+/**
+ * Returns whether the payload is a Symbol
+ *
+ * @param {*} payload
+ * @returns {payload is symbol}
+ */
+
+/**
+ * Returns whether the payload is a an array with at least 1 item
+ *
+ * @param {*} payload
+ * @returns {payload is any[]}
+ */
+
+/**
+ * Returns whether the payload is a plain JavaScript object (excluding special classes or objects with other prototypes)
+ *
+ * @param {*} payload
+ * @returns {payload is PlainObject}
+ */
+
+/**
+ * Returns whether the payload is an array
+ *
+ * @param {any} payload
+ * @returns {payload is any[]}
+ */
+
+/**
+ * Returns whether the payload is null
+ *
+ * @param {*} payload
+ * @returns {payload is null}
+ */
+
+/**
+ * Returns whether the payload is undefined
+ *
+ * @param {*} payload
+ * @returns {payload is undefined}
+ */
+
+/**
+ * TODO: Explore using CSS.escape when it becomes more available
+ * in evergreen browsers.
+ */
+
+/**
+ * The interface for the navigate() function returned from useNavigate().
+ */
+
+/**
+ * The public API for rendering a history-aware <a>.
+ */
+
+/**
+ * These are private action types reserved by Redux.
+ * For any unknown actions, you must return the current state.
+ * If the current state is undefined, you must return the initial state.
+ * Do not reference these action types directly in your code.
+ */
+
+/**
+ * Turns an object whose values are different reducer functions, into a single
+ * reducer function. It will call every child reducer, and gather their results
+ * into a single state object, whose keys correspond to the keys of the passed
+ * reducer functions.
+ *
+ * @param {Object} reducers An object whose values correspond to different
+ * reducer functions that need to be combined into one. One handy way to obtain
+ * it is to use ES6 `import * as reducers` syntax. The reducers may never return
+ * undefined for any action. Instead, they should return their initial state
+ * if the state passed to them was undefined, and the current state for any
+ * unrecognized action.
+ *
+ * @returns {Function} A reducer function that invokes every reducer inside the
+ * passed object, and builds a state object with the same shape.
+ */
+
+/** @class */
+
+/** @license React v0.19.1
+ * scheduler.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v16.13.1
+ * react-is.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v16.14.0
+ * react-dom.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v16.14.0
+ * react.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v17.0.2
+ * react-is.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** A function that accepts a potential "extra argument" value to be injected later,
+ * and returns an instance of the thunk middleware that uses that value
+ */
+
+/************************************************************************/
+
+/******/
+
+/***/
+
+//
+
+// 
+
+//    is used by selectorFactory to decide if it should reinvoke on props changes.
+
+//    new function as the true mapToProps for subsequent calls.
+
+//    the developer that their mapToProps function is not returning a valid result.
+
+//  * Detects whether the mapToProps function being called depends on props, which
+
+//  * On first call, handles mapToProps if returns another function, and treats that
+
+//  * On first call, verifies the first result is a plain object, in order to warn
+
+// $FlowFixMe
+
+// $FlowFixMe: Not typed to avoid destructuring arguments
+
+// - However, we may have gotten new wrapper props after that
+
+// - This render may have been triggered by a Redux store update that produced new child props
+
+// @font-face, @page
+
+// @import
+
+// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
+
+// @see https://github.com/webpack-contrib/style-loader/issues/177
+
+// @ts-ignore
+
+// A length of one signals that mapToProps does not depend on props from the parent component.
+
+// A length of zero is assumed to mean mapToProps is getting args via arguments or ...args and
+
+// Actually run the selector with the most recent store state and wrapper props
+
+// Actually subscribe to the nearest connected ancestor (or store)
+
+// Adapted from convert-source-map (MIT)
+
+// Add the children before adding this route to the array so we traverse the
+
+// Additionally, allow paths starting with `.`, `-`, `~`, and url-encoded entities,
+
+// Allow injecting another batching function later
+
+// Any reducers that existed in both the new and old rootReducer
+
+// Attach the factory function so users can create a customized version
+
+// Avoid calling selector multiple times if the store's state has not changed
+
+// Avoid failures from read-only properties
+
+// Based on the previous check, one of these must be true
+
+// But, if we have new wrapper props, those might change the child props, so we have to recalculate things.
+
+// By explicitly using `prop-types` you are opting into new production behavior.
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/defineProperty.js
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/extends.js
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
+
+// CONCATENATED MODULE: ./node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.esm.js
+
+// CONCATENATED MODULE: ./node_modules/@emotion/memoize/dist/memoize.browser.esm.js
+
+// CONCATENATED MODULE: ./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js
+
+// CONCATENATED MODULE: ./node_modules/immer/dist/immer.esm.js
+
+// CONCATENATED MODULE: ./node_modules/is-what/dist/index.esm.js
+
+// CONCATENATED MODULE: ./node_modules/merge-anything/dist/index.esm.js
+
+// CONCATENATED MODULE: ./node_modules/react-redux/es/components/Provider.js
+
+// CONCATENATED MODULE: ./node_modules/react-redux/es/connect/connect.js
+
+// CONCATENATED MODULE: ./node_modules/react-redux/es/connect/mapDispatchToProps.js
+
+// CONCATENATED MODULE: ./node_modules/react-redux/es/connect/mapStateToProps.js
+
+// CONCATENATED MODULE: ./node_modules/react-redux/es/connect/mergeProps.js
+
+// CONCATENATED MODULE: ./node_modules/react-redux/es/connect/selectorFactory.js
+
+// CONCATENATED MODULE: ./node_modules/react-redux/es/connect/verifySubselectors.js
+
+// CONCATENATED MODULE: ./node_modules/react-redux/es/connect/wrapMapToProps.js
+
+// CONCATENATED MODULE: ./node_modules/react-redux/es/exports.js
+
+// CONCATENATED MODULE: ./node_modules/react-redux/es/hooks/useDispatch.js
+
+// CONCATENATED MODULE: ./node_modules/react-redux/es/hooks/useReduxContext.js
+
+// CONCATENATED MODULE: ./node_modules/react-redux/es/hooks/useSelector.js
+
+// CONCATENATED MODULE: ./node_modules/react-redux/es/hooks/useStore.js
+
+// CONCATENATED MODULE: ./node_modules/react-redux/es/index.js
+
+// CONCATENATED MODULE: ./node_modules/react-redux/es/utils/Subscription.js
+
+// CONCATENATED MODULE: ./node_modules/react-redux/es/utils/batch.js
+
+// CONCATENATED MODULE: ./node_modules/react-redux/es/utils/bindActionCreators.js
+
+// CONCATENATED MODULE: ./node_modules/react-redux/es/utils/isPlainObject.js
+
+// CONCATENATED MODULE: ./node_modules/react-redux/es/utils/reactBatchedUpdates.js
+
+// CONCATENATED MODULE: ./node_modules/react-redux/es/utils/shallowEqual.js
+
+// CONCATENATED MODULE: ./node_modules/react-redux/es/utils/useIsomorphicLayoutEffect.js
+
+// CONCATENATED MODULE: ./node_modules/react-router-dom/index.js
+
+// CONCATENATED MODULE: ./node_modules/react-router/index.js
+
+// CONCATENATED MODULE: ./node_modules/redux-thunk/es/index.js
+
+// CONCATENATED MODULE: ./node_modules/redux/es/redux.js
+
+// CONCATENATED MODULE: ./src/App/index.jsx
+
+// CONCATENATED MODULE: ./src/components/Header/index.jsx
+
+// CONCATENATED MODULE: ./src/components/Styles/stylesButton.js
+
+// CONCATENATED MODULE: ./src/components/Styles/stylesCalculator.js
+
+// CONCATENATED MODULE: ./src/components/Styles/stylesDisplay.js
+
+// CONCATENATED MODULE: ./src/components/Styles/stylesKeypad.jsx
+
+// CONCATENATED MODULE: ./src/components/classes/Button/index.jsx
+
+// CONCATENATED MODULE: ./src/components/classes/Calculator/index.jsx
+
+// CONCATENATED MODULE: ./src/components/classes/Display/index.jsx
+
+// CONCATENATED MODULE: ./src/components/classes/History/index.jsx
+
+// CONCATENATED MODULE: ./src/components/classes/KeyPad/index.jsx
+
+// CONCATENATED MODULE: ./src/components/functions/Button/index.jsx
+
+// CONCATENATED MODULE: ./src/components/functions/Calculator/index.jsx
+
+// CONCATENATED MODULE: ./src/components/functions/Display/index.jsx
+
+// CONCATENATED MODULE: ./src/components/functions/History/index.jsx
+
+// CONCATENATED MODULE: ./src/components/functions/KeyPad/index.jsx
+
+// CONCATENATED MODULE: ./src/constants/router.js
+
+// CONCATENATED MODULE: ./src/helpers/changeSing.js
+
+// CONCATENATED MODULE: ./src/helpers/checkAddToDisplay.js
+
+// CONCATENATED MODULE: ./src/helpers/checkExpression.js
+
+// CONCATENATED MODULE: ./src/helpers/replaceOperation.js
+
+// CONCATENATED MODULE: ./src/index.jsx
+
+// CONCATENATED MODULE: ./src/pages/HomeClasses/index.jsx
+
+// CONCATENATED MODULE: ./src/pages/HomeFunctions/index.jsx
+
+// CONCATENATED MODULE: ./src/pages/Settings/index.jsx
+
+// CONCATENATED MODULE: ./src/redux/displaySlice.js
+
+// CONCATENATED MODULE: ./src/redux/historySlice.js
+
+// CONCATENATED MODULE: ./src/redux/store.js
+
+// CONCATENATED MODULE: ./src/theme.js
+
+// Cancel the event.
+
+// Capture values for checking if and when this component unmounts
+
+// Check if module is in cache
+
+// Chrome (and legacy IE) requires returnValue to be set.
+
+// Combine passed cssRules with previously deferred CSS rules
+
+// Create a new module (and put it into the cache)
+
+// DCE check should happen before ReactDOM bundle executes so that
+
+// Default to a dummy "batch" implementation that just runs the callback
+
+// Definitely a string, and a clone
+
+// Detect buggy property enumeration order in older V8 versions.
+
+// DevTools can report bad minification during injection.
+
+// DevTools shouldn't crash React, no matter what.
+
+// Distinguish between actual "data" props that were passed to the wrapper component,
+
+// Don't pass through non HTML tags through to HTML elements
+
+// ESM COMPAT FLAG
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/slicedToArray.js
+
+// EXTERNAL MODULE: ./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js
+
+// EXTERNAL MODULE: ./node_modules/react-loader-spinner/dist/loader/css/react-spinner-loader.css
+
+// EXTERNAL MODULE: ./node_modules/react/index.js
+
+// Each leading .. segment means "go up one route" instead of "go up one
+
+// Empty strings should be treated the same as / paths
+
+// Enable batched updates in our subscriptions for use
+
+// Ensure the pathname has a trailing slash if the original to value had one.
+
+// Execute the module function
+
+// Exports
+
+// Flag the module as loaded
+
+// For old IE
+
+// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+
+// HOOKS
+
+// Helper to call a given function, only once
+
+// If React sees the exact same element reference as last time, it bails out of re-rendering
+
+// If pure is true, the selector returned by selectorFactory will memoize its results,
+
+// If the URL hasn't changed, a regular <a> will do a replace instead of
+
+// If the child props _did_ change (or we caught an error), this wrapper component needs to re-render
+
+// If the child props haven't changed, nothing to do here - cascade the subscription update
+
+// If the render was from a store update, clear out that reference and cascade the subscriber update
+
+// If there are more ".." segments than parent routes, resolve relative to
+
+// If this "action" is really a function, call it and return the result.
+
+// If two routes are siblings, we should try to match the earlier sibling
+
+// If we aren't running in "pure" mode, we don't want to memoize values.
+
+// If we have new child props, and the same wrapper props, we know we should use the new child props as-is.
+
+// If we're in "pure" mode, ensure our wrapper component only re-renders when incoming props have changed.
+
+// If we're not subscribed to the store, nothing to do here
+
+// Ignore everything but left clicks
+
+// Ignore extraneous hashchange events.
+
+// Ignore non-elements. This allows people to more easily inline
+
+// Important!
+
+// Imports
+
+// In that case, throw the error from here so it doesn't get lost.
+
+// Inlined / shortened version of `kindOf` from https://github.com/jonschlinkert/kind-of
+
+// Inlined version of the `symbol-observable` polyfill
+
+// It's possible that we caught an error due to a bad mapState function, but the
+
+// Keep the root "" segment so the pathname starts at /
+
+// Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
+
+// Load entry module and return exports
+
+// Memoize the check that determines which context instance we should use.
+
+// Module
+
+// NOTE: We cannot mutate the deferred array itself as all clones
+
+// No need to subscribe a static component to theme changes, it won't change anything
+
+// Note that we do this because on renders _not_ caused by store updates, we need the latest store state
+
+// Now that all that's done, we can finally try to actually render the child component.
+
+// Object.prototype.hasOwnProperty.call
+
+// Otherwise, it doesn't really make sense to rank non-siblings by index,
+
+// Otherwise, match a word boundary or a proceeding /. The word boundary restricts
+
+// Otherwise, pass the action down the middleware chain as usual
+
+// Otherwise, put this component's subscription instance into context, so that
+
+// Our re-subscribe logic only runs when the store/subscription setup changes
+
+// Propagate any mapState/mapDispatch errors upwards
+
+// Props should take precedence over ThemeProvider, which should take precedence over
+
+// Pull data from the store after first render in case the store has
+
+// Re-create this selector whenever the store changes.
+
+// React currently throws a warning when using useLayoutEffect on the server.
+
+// React v16.11 and below
+
+// React v16.12 and above
+
+// Remove the beforeunload listener so the document may
+
+// Return the exports of the module
+
+// Revert the POP
+
+// Routes without a path shouldn't ever match by themselves unless they are
+
+// SVG
+
+// SVG-related properties
+
+// Save references to the new child props.  Note that we track the "child props from store update"
+
+// See https://html.spec.whatwg.org/#unloading-documents
+
+// Set up refs to coordinate values between the subscription effect and the render logic
+
+// Shorthands for all valid HTML Elements
+
+// So, we'll use the child props from store update only if the wrapper props are the same as last time.
+
+// Some versions of I.E. have different rules for clearTimeout vs setTimeout
+
+// Source: https://github.com/garycourt/murmurhash-js/blob/master/murmurhash2_gc.js
+
+// Special case to return head of iframe instead of iframe itself
+
+// TODO We're reading the store directly in render() here. Bad idea?
+
+// TODO: Add more comments
+
+// TODO: Support forced reloading
+
+// TODO: overwrite in-place instead of remove+create?
+
+// Taken from https://github.com/facebook/react/blob/b87aabdfe1b7461e7331abb3601d9e6bb27544bc/packages/react-dom/src/shared/dangerousStyleValue.js
+
+// Test for IE <= 9 as proposed by Browserhacks
+
+// Tests for existence of standard globals is to allow style-loader
+
+// Thanks to ReactDOMFactories for this handy list!
+
+// The child props selector needs the store reference as an input.
+
+// The module cache
+
+// The require function
+
+// The thunk middleware looks for any functions that were passed to `store.dispatch`.
+
+// They are going to lose state here, but there is no real
+
+// This Subscription's source should match where store came from: props vs. context. A component
+
+// This action has a similiar effect to ActionTypes.INIT.
+
+// This is used to make sure we don't warn about the same
+
+// This shouldn't happen as long as we do top-down subscriptions correctly, but
+
+// This will likely cause Bad Things (TM) to happen in Concurrent Mode.
+
+// This will throw an exception if access to iframe is blocked
+
+// To avoid conditionally calling hooks, we fall back to a tiny wrapper
+
+// To get around it, we can conditionally useEffect on the server (no-op) and
+
+// To maintain the wrapperProps object reference, memoize this destructuring.
+
+// Transparently support React.Fragment and its children.
+
+// Tricky logic here:
+
+// UNUSED EXPORTS: concatArrays, merge
+
+// URL segment".  This is a key difference from how <a href> works and a
+
+// UTILS
+
+// Used by whenMapStateToPropsIsFunction and whenMapDispatchToPropsIsFunction,
+
+// Users may optionally pass in a custom context instance to use instead of our ReactReduxContext.
+
+// Verify that the code above has been dead code eliminated (DCE'd).
+
+// We don't expect any of the above to throw, but better to be safe.
+
+// We memoize the elements for the rendered child component as an optimization.
+
+// We need this to execute synchronously every time we re-render. However, React warns
+
+// We need to compute the pathnameBase here using the raw splat value
+
+// We should still report in case we break this code.
+
+// We want to capture the wrapper props and child props we used for later comparisons
+
+// When a store is created, an "INIT" action is dispatched so that every
+
+// When newVal is an object do the merge recursively
+
+// When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+
+// When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+
+// __webpack_public_path__
+
+// `notifyNestedSubs` is duplicated to handle the case where the component is unmounted in
+
+// a push, so do the same here.
+
+// about useLayoutEffect in SSR, so we try to detect environment and fall back to
+
+// all SC-specific things should not be hoisted
+
+// allow detectFactoryAndVerify to get ownProps
+
+// allowing connectAdvanced's shouldComponentUpdate to return false if final
+
+// ancestor components re-render before descendants
+
+// and shouldn't be increasing the number of class names
+
+// and values needed to control behavior (forwarded refs, alternate context instances).
+
+// as a ref instead of a useState/useReducer because we need a way to determine if that value has
+
+// at-rule
+
+// available, otherwise a store update may happen between render and the effect,
+
+// been processed.  If this went into useState/useReducer, we couldn't clear out the value without
+
+// behavior by simply putting routes with identical paths in the order they
+
+// but do not consume the character in the matched path so they can match against
+
+// but since JS is single=threaded, we can rely on that to ensure
+
+// cached from whatever global is present so that test runners that stub it
+
+// changed
+
+// changed since we began.
+
+// conditionals in their route config.
+
+// connected descendants won't update until after this component is done
+
+// connected to the store via props shouldn't use subscription from context, or vice versa.
+
+// create a fake namespace object
+
+// createConnect with default args builds the 'official' connect behavior. Calling it with
+
+// css base code, injected by the css-loader
+
+// defaultProps, but React automatically puts defaultProps on props.
+
+// define __esModule on exports
+
+// define getter function for harmony exports
+
+// define newObject to merge all values upon
+
+// dependsOnOwnProps is used by createMapToPropsProxy to determine whether to pass props as args
+
+// different options opens up some testing and extensibility scenarios
+
+// do the same (see clones[i].inject)
+
+// don't break things.  But we need to wrap it in a try catch in case it is
+
+// don't hoist over string (html) components
+
+// due to cross-origin restrictions
+
+// empty string to avoid regexp issues
+
+// encapsulates the subscription logic for connecting a component to the redux store, as
+
+// ensure latest selected state is reused so that a custom equality function can result in identical references
+
+// eslint-disable-line no-new-wrappers
+
+// eslint-disable-next-line func-names
+
+// eslint-disable-next-line guard-for-in
+
+// eslint-disable-next-line guard-for-in, no-restricted-syntax
+
+// eslint-disable-next-line jsx-a11y/anchor-has-content
+
+// eslint-disable-next-line no-extend-native
+
+// eslint-disable-next-line no-param-reassign
+
+// eslint-disable-next-line no-plusplus
+
+// eslint-disable-next-line prefer-destructuring
+
+// eslint-disable-next-line react/no-danger
+
+// expose the module cache
+
+// expose the modules object (__webpack_modules__)
+
+// extend merge rules
+
+// first. This allows people to have fine-grained control over the matching
+
+// fold the underlying StyledComponent rules up (implicit extend)
+
+// fold the underlying StyledComponent target up since we folded the styles
+
+// forcing another re-render, which we don't want.
+
+// function because try/catches deoptimize in certain engines.
+
+// functions are allowed to be static if they're just being
+
+// getDefaultExport function for compatibility with non-harmony modules
+
+// http://fb.me/prop-types-in-prod
+
+// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+
+// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+
+// https://developer.mozilla.org/de/docs/Web/API/Window/popstate_event
+
+// https://github.com/amilajack/eslint-plugin-flowtype-errors/issues/133
+
+// if clearTimeout wasn't available but was latter defined
+
+// if mapStateToProps is falsy, the Connect component doesn't subscribe to store state changes
+
+// if setTimeout wasn't available but was latter defined
+
+// if we ever do those wrong, this throw will surface the error in our tests.
+
+// import a list of modules into the list
+
+// index routes, so don't add them to the list of possible branches.
+
+// instead of using params["*"] later because it will be decoded then
+
+// is created synchronously, otherwise a store update may occur before the
+
+// is re-rendered, the selectors are called again, and
+
+// istanbul ignore if
+
+// istanbul ignore next
+
+// just useEffect instead to avoid the warning, since neither will run anyway.
+
+// keys multiple times.
+
+// light: '#fff',
+
+// major reason we call this a "to" value instead of a "href".
+
+// mode & 1: value is a module id, require it
+
+// mode & 2: merge all properties of value into the ns
+
+// mode & 4: return value when already ns object
+
+// mode & 8|1: behave like require
+
+// nested paths.
+
+// no consecutive self refs (.b.b); that is a precedence boost and treated differently
+
+// object and shouldComponentUpdate will always return true.
+
+// options object:
+
+// parent re-rendered without this component and we're about to unmount.
+
+// parent routes to matching only their own words and nothing more, e.g. parent
+
+// passed through to selectorFactory
+
+// place our cache into shared context so it'll persist between HMRs
+
+// popstate does not fire on hashchange in IE 11 and old (trident) Edge
+
+// probably be avoided if Subscription's listeners logic is changed to not call listeners
+
+// property
+
+// props have not changed. If false, the selector will always return a new
+
+// re-define the origin and newComer as targetVal and newVal
+
+// recursive case
+
+// reducer returns their initial state. This effectively populates
+
+// return the list of modules as css string
+
+// route "/home" should not match "/home2".
+
+// route tree depth-first and child routes appear before their parents in
+
+// same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+
+// same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+
+// selector
+
+// shim for using process in browser
+
+// so they sort equally.
+
+// src/configureStore.ts
+
+// src/createAction.ts
+
+// src/createReducer.ts
+
+// src/createSlice.ts
+
+// src/entities/entity_state.ts
+
+// src/getDefaultMiddleware.ts
+
+// src/immutableStateInvariantMiddleware.ts
+
+// src/index.ts
+
+// src/isPlainObject.ts
+
+// src/listenerMiddleware/utils.ts
+
+// src/mapBuilders.ts
+
+// src/utils.ts
+
+// statically styled-components don't need to build an execution context object,
+
+// still be salvageable in the pagehide event.
+
+// stylis has no concept of state to be passed to plugins
+
+// subscription callback always has the selector from the latest render commit
+
+// subscription is created and an inconsistent state may be observed
+
+// tags it will allow on a page
+
+// that child, same as if it was wrapped in React.memo() or returned false from shouldComponentUpdate.
+
+// that have been unsubscribed in the  middle of the notification loop.
+
+// that just executes the given callback immediately.
+
+// the "flattened" version.
+
+// the first self-ref is always untouched
+
+// the initial state tree.
+
+// the middle of the notification loop, where `subscription` will then be null. This can
+
+// the new state tree with any relevant data from the old one.
+
+// the root / URL.
+
+// there should be at least two self-refs to do a replacement (.b > .b)
+
+// therefore not reporting its length accurately..
+
+// these properties stay in sync with the current stylis run
+
+// this function wraps mapToProps in a proxy function which does several things:
+
+// to determine what the child props should be
+
+// to determine what the child props should be.
+
+// to operate correctly into non-standard environments
+
+// to the mapToProps function being wrapped. It is also used by makePurePropsSelector to determine
+
+// try...catch because iOS limits us to 100 pushState calls :/
+
+// useLayoutEffect in the browser. We need useLayoutEffect to ensure the store
+
+// used in error messages
+
+// used to compute Connect's displayName from the wrapped component's displayName.
+
+// used to get the classname of a nested styled component
+
+// v8 likes predictible objects
+
+// want them tried.
+
+// way to warn them about it since the page will refresh...
+
+// we ignore all errors here, since when the component
+
+// webpackBootstrap
+
+// well as nesting subscriptions of descendant components, so that we can ensure the
+
+// when when somebody has screwed with setTimeout but no I.E. maddness
+
+// whether mapToProps needs to be invoked when props have changed.
+
+// which may cause missed updates; we also must ensure the store subscription
+
+// will receive the previous state. This effectively populates
+
+// will throw again, if neither props nor store state
+
+// with standard React renderers (ReactDOM, React Native)
+
+// with whatever "extra arg" they want to inject into their thunks
+
+// work directly on newComer if its not an object
+
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+
+//# sourceMappingURL=index.js.map
+
+//# sourceMappingURL=redux-toolkit.esm.js.map
+
+//# sourceMappingURL=stylis.min.js.map
+
+///////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+
+//normal enviroments in sane situations
