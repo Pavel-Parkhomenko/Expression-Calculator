@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import {checkAddToDisplay, checkExpression, replaceOperation} from "@/helpers"
+import {changeSing, checkAddToDisplay, checkExpression, replaceOperation} from "@/helpers"
 import { calculator } from "@/compute/compute"
 
 const displaySlice = createSlice({
@@ -29,12 +29,10 @@ const displaySlice = createSlice({
     },
 
     changeSign(state){
-      if(/^\d+$/.test(state.display))
-        state.display = "(" + "-" + state.display + ")"
-      else if(/^\(-\d+/.test(state.display))
-        state.display = state.display
-          .split('')
-          .filter(item => parseFloat(item) ? item : '').join('')
+      const {display, expression} = changeSing({...state})
+      state.display = display
+      state.expression = expression
+      console.log(state.expression)
     },
 
     computeExpression(state){

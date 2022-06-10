@@ -7,14 +7,11 @@ import {FlexColumnStyled, FlexRowStyled} from "@/components/Styles/stylesCalcula
 export function Calculator () {
   return (
     <FlexRowStyled>
-
       <FlexColumnStyled>
         <Display/>
         <KeyPad/>
       </FlexColumnStyled>
-
       <History/>
-
     </FlexRowStyled>
   )
 }

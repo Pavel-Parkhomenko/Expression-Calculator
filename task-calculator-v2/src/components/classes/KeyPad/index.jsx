@@ -1,12 +1,22 @@
 import React from 'react'
 import {ControlPanelStyled, KeyGridNumber, KeyGridOperations} from "@/components/Styles/stylesKeypad"
 import {connect} from "react-redux"
-import {addToDisplay, removeAllFromDisplay, removeOneFromDisplay, computeExpression} from "@/redux/displaySlice"
+import {
+  addToDisplay,
+  removeAllFromDisplay,
+  removeOneFromDisplay,
+  computeExpression,
+  changeSign,
+} from "@/redux/displaySlice"
 import {Button} from "@/components/classes/Button"
-import {BUTTONS_OPERATIONS, BUTTONS_NUMBERS} from "@/constants"
+import {BUTTONS_OPERATIONS, BUTTONS_NUMBERS, OPERATIONS} from "@/constants"
 import {addHistory} from "@/redux/historySlice"
 
 class KeyPad extends React.Component {
+  constructor(props) {
+    super(props)
+    this.prevKey = React.createRef()
+  }
 
   handleClickKey = event => {
     if (event.target.tagName.toLowerCase() !== 'button') return
@@ -23,12 +33,15 @@ class KeyPad extends React.Component {
         this.props.addHistory({expression})
         this.props.computeExpression()
         break
+      case "+/-":
+        this.props.changeSign()
+        break
       default:
-        // if (OPERATIONS.includes(key) && OPERATIONS.includes(prevKey.current)) return
-        // if (prevKey.current === '' && OPERATIONS.includes(key)) return
-        // if (prevKey.current === '.' && key === '.') return
+        if (OPERATIONS.includes(key) && OPERATIONS.includes(this.prevKey.current)) return
+        if (this.prevKey.current === '' && OPERATIONS.includes(key)) return
+        if (this.prevKey.current === '.' && key === '.') return
         this.props.addToDisplay(key)
-        // prevKey.current = key
+        this.prevKey.current = key
     }
   }
 
@@ -56,6 +69,7 @@ const mapDispatchToProps = {
   removeOneFromDisplay,
   computeExpression,
   addHistory,
+  changeSign,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(KeyPad)

@@ -22,7 +22,7 @@ export const ControlPanelStyled = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   margin-left: 10%;
-  margin-top: ${({ theme }) => theme.spaces[2]}px;
+  margin-top: ${({ theme }) => theme.spaces[4]}px;
 
   @media screen and (max-width: 700px){
     flex-direction: column;
