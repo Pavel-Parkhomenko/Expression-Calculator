@@ -5,6 +5,7 @@ import {changeTheme} from "@/redux/themeSlice"
 import {Button, SettingsStyled} from "../Styles/stylesSettings"
 import {THEME_DARK, THEME_LIGHT} from "@/constants"
 import {Header} from "@/components/Header"
+import {removeAllFromDisplay} from "@/redux/displaySlice"
 
 export function Settings () {
 
@@ -13,6 +14,7 @@ export function Settings () {
 
   const handleClearHistory = () => {
     dispatch(clearHistory())
+    dispatch(removeAllFromDisplay())
   }
 
   const handleChangeTheme = event => {

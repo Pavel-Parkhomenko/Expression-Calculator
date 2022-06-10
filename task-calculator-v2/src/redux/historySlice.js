@@ -9,9 +9,8 @@ const historySlice = createSlice({
     clearHistory(state){
       state.history = []
     },
+
     addHistory(state, payload){
-      console.log('history')
-      console.log(payload.payload.expression)
       state.history = [...state.history, payload.payload.expression]
     },
   },

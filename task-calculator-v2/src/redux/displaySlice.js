@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { checkExpression, replaceOperation } from "@/helpers"
+import {checkAddToDisplay, checkExpression, replaceOperation} from "@/helpers"
 import { calculator } from "@/compute/compute"
 
 const displaySlice = createSlice({
@@ -7,15 +7,13 @@ const displaySlice = createSlice({
   initialState:{
     expression: "",
     display: "",
+    answer: "",
   },
   reducers: {
     addToDisplay(state, action) {
-      if(state.display === 'Ошибка') state.display = action.payload
-      state.display = /[+-/%*]/.test(state.expression[state.expression.length - 1])
-        ? action.payload : state.display + action.payload
-
-      state.expression = state.expression + action.payload
-      console.log(state.expression)
+      const {expression, display} = checkAddToDisplay({...state}, action.payload)
+      state.display = display
+      state.expression = expression
     },
 
     removeOneFromDisplay(state) {
@@ -34,24 +32,23 @@ const displaySlice = createSlice({
       if(/^\d+$/.test(state.display))
         state.display = "(" + "-" + state.display + ")"
       else if(/^\(-\d+/.test(state.display))
-        state.display = state.display.split('')// !!!!!!!
+        state.display = state.display
+          .split('')
+          .filter(item => parseFloat(item) ? item : '').join('')
     },
 
     computeExpression(state){
-      const answer = checkExpression(state.expression)
+      state.answer = checkExpression(state.expression)
         ? calculator(replaceOperation(state.expression))
         : "Ошибка"
 
-      console.log(answer)
-      console.log(/^-\d+\.\d+$|^\d+\.\d+$/.test(answer.toString()))
+      if(state.answer === "Ошибка")
+        state.display = state.answer
+      else if(/^-\d+\.\d+$|^\d+\.\d{3,}$/.test(state.answer))
+        state.display = state.answer.toFixed(3)
+      else state.display = state.answer
 
-      if(answer === "Ошибка")
-        state.display = answer
-      else if(/^-\d+\.\d+$|^\d+\.\d+$/.test(answer))
-        state.display = answer.toFixed(3)
-
-      else state.display = answer
-      state.expression = answer
+      state.expression = ''
     },
   },
 })

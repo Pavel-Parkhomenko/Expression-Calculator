@@ -36,7 +36,7 @@ export function KeyPad() {
         dispatch(changeSign())
         break
       default: {
-        if(OPERATIONS.includes(key) && OPERATIONS.includes(prevKey.current)) return
+        if(OPERATIONS.includes(key) && (OPERATIONS.includes(prevKey.current) || prevKey.current === '=')) return
         if(prevKey.current === '' && OPERATIONS.includes(key)) return
         if(prevKey.current === '.' && key === '.') return
         dispatch(addToDisplay(key))

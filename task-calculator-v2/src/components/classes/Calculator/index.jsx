@@ -10,8 +10,8 @@ export class Calculator extends React.Component{
       <FlexRowStyled>
 
         <FlexColumnStyled>
-          <Display/>
-          <KeyPad/>
+          <Display />
+          <KeyPad />
         </FlexColumnStyled>
 
         <History/>
