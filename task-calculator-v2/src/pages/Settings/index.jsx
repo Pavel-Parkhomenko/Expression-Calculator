@@ -2,7 +2,7 @@ import React from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import {clearHistory} from "@/redux/historySlice"
 import {changeTheme} from "@/redux/themeSlice"
-import {Button, SettingsStyled} from "../Styles/stylesSettings"
+import {Button, SettingsStyled} from "@/components/Styles/stylesSettings"
 import {THEME_DARK, THEME_LIGHT} from "@/constants"
 import {Header} from "@/components/Header"
 import {removeAllFromDisplay} from "@/redux/displaySlice"

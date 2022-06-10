@@ -5,19 +5,20 @@ export const HistoryStyled = styled.div`
   width: 20%;
   display: flex;
   flex-direction: column;
-  padding-left: 5px;
+  padding-left: ${({ theme }) => theme.spaces[1]}px;
 `
 
 export const TitleStyled = styled.h3`
-  color: #b2803e;
-  margin-bottom: 5px;
+  color: ${({ theme }) => theme.colors.textColor};
+  margin-bottom: ${({ theme }) => theme.spaces[1]}px;
 `
 
 export const ButtonStyled = styled.button`
-  background-color: burlywood;
-  margin-bottom: 5px;
+  background-color: ${({ theme }) => theme.textColor.info};
+  margin-bottom: ${({ theme }) => theme.spaces[1]}px;
+  width: 50%;
 `
 
 export const HistoryInfoStyled = styled.p`
-  margin-bottom: 3px;
+  margin-bottom: ${({ theme }) => theme.spaces[1]}px;
 `

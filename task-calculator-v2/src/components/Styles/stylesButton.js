@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 
 export const ButtonStyled = styled.button`
-  height: 70px;
-  width: 50%;
-  border-radius: 10px;
+  height: ${({ theme }) => theme.size.small - 10}px;
+  width: ${({ theme }) => theme.size.small - 10}px;
+  border-radius: ${({ theme }) => theme.spaces[3]}px;
   cursor: pointer;
-  font-size: 1.5em;
+  font-size: ${({ theme }) => theme.fontSizes[4]}px;
 
   :hover {
-    background-color: #fff3e4;
+    background-color: ${({ theme }) => theme.textColor.muted};
   }
 `
