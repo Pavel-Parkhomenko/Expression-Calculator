@@ -1,6 +1,6 @@
 {
   "extends": ["standard", "standard-react", "prettier", "prettier/react"],
-  "plugins": ["prettier", "react-hooks", "cypress"],
+  "plugins": ["prettier", "react-hooks", "cypress", "react"],
   "parser": "babel-eslint",
   "env": {
     "node": true,
@@ -20,6 +20,10 @@
         "ignorePattern": "import"
       }
     ],
+    "react/void-dom-elements-no-children": "warn",
+    "react/jsx-tag-spacing": "warn",
+    "object-curly-spacing": "warn",
+    "react/jsx-newline": "off",
     "no-unused-vars": "warn",
     "operator-linebreak": "warn",
     "react-hooks/rules-of-hooks": "error",

@@ -1,10 +1,9 @@
-export const changeSing = ({display, expression}) => {
-  if(/^\d+$/.test(display)) {
+export const changeSing = ({ display, expression }) => {
+  if (/^\d+$/.test(display)) {
     expression = expression.slice(0, expression.length - display.length)
     display = "(" + "-" + display + ")"
     expression += display
-  }
-  else if(/^\(-\d+/.test(display)) {
+  } else if (/^\(-\d+/.test(display)) {
     console.log("source: ", expression)
     console.log('dl: ', display.length)
     expression = expression.slice(0, expression.length - display.length)
@@ -16,5 +15,5 @@ export const changeSing = ({display, expression}) => {
     console.log("after: ", expression)
   }
 
-  return {display, expression}
+  return { display, expression }
 }

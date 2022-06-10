@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 const historySlice = createSlice({
   name: 'history',
@@ -16,6 +16,6 @@ const historySlice = createSlice({
   },
 })
 
-export const {clearHistory, addHistory} = historySlice.actions
+export const { clearHistory, addHistory } = historySlice.actions
 
 export default historySlice.reducer

@@ -1,11 +1,11 @@
 import React from 'react'
 import { useLocation } from 'react-router'
 
-import {HeaderDiv, LinkStyled, Menu, Title} from '../Styles/stylesHeader'
-import {HOME_CLASSES_PAGE_ROUTE, HOME_PAGE_ROUTE, SETTINGS_PAGE_ROUTE} from "@/constants"
+import { HeaderDiv, LinkStyled, Menu, Title } from '../Styles/stylesHeader'
+import { HOME_CLASSES_PAGE_ROUTE, HOME_PAGE_ROUTE, SETTINGS_PAGE_ROUTE } from "@/constants"
 
 export function Header () {
-  const {pathname} = useLocation()
+  const { pathname } = useLocation()
 
   return (
     <HeaderDiv>

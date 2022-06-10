@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import {changeSing, checkAddToDisplay, checkExpression, replaceOperation} from "@/helpers"
+import { changeSing, checkAddToDisplay, checkExpression, replaceOperation } from "@/helpers"
 import { calculator } from "@/compute/compute"
 
 const displaySlice = createSlice({
@@ -11,7 +11,7 @@ const displaySlice = createSlice({
   },
   reducers: {
     addToDisplay(state, action) {
-      const {expression, display} = checkAddToDisplay({...state}, action.payload)
+      const { expression, display } = checkAddToDisplay({ ...state }, action.payload)
       state.display = display
       state.expression = expression
     },
@@ -29,7 +29,7 @@ const displaySlice = createSlice({
     },
 
     changeSign(state){
-      const {display, expression} = changeSing({...state})
+      const { display, expression } = changeSing({ ...state })
       state.display = display
       state.expression = expression
       console.log(state.expression)

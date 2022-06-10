@@ -1,6 +1,6 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {DisplayStyled} from "@/components/Styles/stylesDisplay"
+import { connect } from 'react-redux'
+import { DisplayStyled } from "@/components/Styles/stylesDisplay"
 
 class Display extends React.Component {
   render() {

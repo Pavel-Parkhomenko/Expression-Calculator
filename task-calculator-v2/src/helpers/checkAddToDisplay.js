@@ -1,4 +1,4 @@
-export const checkAddToDisplay = ({expression, display, answer}, payload) => {
+export const checkAddToDisplay = ({ expression, display, answer }, payload) => {
   if (answer === display) display = ''
   if (display === 'Ошибка') display = payload
   else if (/[+/%*]/.test(expression[expression.length - 1]))
@@ -13,5 +13,5 @@ export const checkAddToDisplay = ({expression, display, answer}, payload) => {
 
   expression = expression + payload
 
-  return {expression, display}
+  return { expression, display }
 }

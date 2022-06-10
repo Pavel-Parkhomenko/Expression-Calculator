@@ -1,6 +1,6 @@
 import React from 'react'
-import {ControlPanelStyled, KeyGridNumber, KeyGridOperations} from "@/components/Styles/stylesKeypad"
-import {connect} from "react-redux"
+import { ControlPanelStyled, KeyGridNumber, KeyGridOperations } from "@/components/Styles/stylesKeypad"
+import { connect } from "react-redux"
 import {
   addToDisplay,
   removeAllFromDisplay,
@@ -8,9 +8,9 @@ import {
   computeExpression,
   changeSign,
 } from "@/redux/displaySlice"
-import {Button} from "@/components/classes/Button"
-import {BUTTONS_OPERATIONS, BUTTONS_NUMBERS, OPERATIONS} from "@/constants"
-import {addHistory} from "@/redux/historySlice"
+import { Button } from "@/components/classes/Button"
+import { BUTTONS_OPERATIONS, BUTTONS_NUMBERS, OPERATIONS } from "@/constants"
+import { addHistory } from "@/redux/historySlice"
 
 class KeyPad extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class KeyPad extends React.Component {
 
   handleClickKey = event => {
     if (event.target.tagName.toLowerCase() !== 'button') return
-    const {expression} = this.props
+    const { expression } = this.props
     const key = event.target.textContent
     switch (key) {
       case "C":
@@ -30,7 +30,7 @@ class KeyPad extends React.Component {
         this.props.removeAllFromDisplay()
         break
       case "=":
-        this.props.addHistory({expression})
+        this.props.addHistory({ expression })
         this.props.computeExpression()
         break
       case "+/-":
@@ -49,10 +49,10 @@ class KeyPad extends React.Component {
     return (
       <ControlPanelStyled onClick={this.handleClickKey}>
         <KeyGridNumber>
-          {BUTTONS_NUMBERS.map(x => <Button key={x} title={x}/>)}
+          {BUTTONS_NUMBERS.map(x => <Button key={x} title={x} />)}
         </KeyGridNumber>
         <KeyGridOperations>
-          {BUTTONS_OPERATIONS.map(x => <Button key={x} title={x}/>)}
+          {BUTTONS_OPERATIONS.map(x => <Button key={x} title={x} />)}
         </KeyGridOperations>
       </ControlPanelStyled>
     )

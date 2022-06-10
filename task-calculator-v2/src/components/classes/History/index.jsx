@@ -1,6 +1,6 @@
 import React from 'react'
-import {ButtonStyled, HistoryInfoStyled, HistoryStyled, TitleStyled} from "@/components/Styles/stylesHistory"
-import {connect} from 'react-redux'
+import { ButtonStyled, HistoryInfoStyled, HistoryStyled, TitleStyled } from "@/components/Styles/stylesHistory"
+import { connect } from 'react-redux'
 
 class History extends React.Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class History extends React.Component {
 
   handleHistory = () => {
     this.setState(state => {
-      return {isOpenHistory: !state.isOpenHistory}
+      return { isOpenHistory: !state.isOpenHistory }
     })
   }
 

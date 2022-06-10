@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
-import {useSelector} from "react-redux"
-import {ButtonStyled, HistoryInfoStyled, HistoryStyled, TitleStyled} from "@/components/Styles/stylesHistory"
+import React, { useState } from 'react'
+import { useSelector } from "react-redux"
+import { ButtonStyled, HistoryInfoStyled, HistoryStyled, TitleStyled } from "@/components/Styles/stylesHistory"
 
 export function History() {
   const history = useSelector(state => state.history.history)
