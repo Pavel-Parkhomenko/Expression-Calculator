@@ -34,7 +34,7 @@ const displaySlice = createSlice({
       if(/^\d+$/.test(state.display))
         state.display = "(" + "-" + state.display + ")"
       else if(/^\(-\d+/.test(state.display))
-        state.display = state.display.split('')
+        state.display = state.display.split('')// !!!!!!!
     },
 
     computeExpression(state){
@@ -49,7 +49,9 @@ const displaySlice = createSlice({
         state.display = answer
       else if(/^-\d+\.\d+$|^\d+\.\d+$/.test(answer))
         state.display = answer.toFixed(3)
+
       else state.display = answer
+      state.expression = answer
     },
   },
 })

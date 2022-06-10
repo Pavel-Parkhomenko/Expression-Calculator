@@ -10,8 +10,14 @@ export const HistoryStyled = styled.div`
 
 export const TitleStyled = styled.h3`
   color: #b2803e;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 `
+
+export const ButtonStyled = styled.button`
+  background-color: burlywood;
+  margin-bottom: 5px;
+`
+
 export const HistoryInfoStyled = styled.p`
   margin-bottom: 3px;
 `

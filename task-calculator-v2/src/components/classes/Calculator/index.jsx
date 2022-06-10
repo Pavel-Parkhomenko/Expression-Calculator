@@ -1,6 +1,6 @@
 import React from 'react'
 import Display from "@/components/classes/Display"
-import { History } from "@/components/classes/History"
+import History from "@/components/classes/History"
 import KeyPad from "@/components/classes/KeyPad"
 import {FlexColumnStyled, FlexRowStyled} from "@/components/Styles/stylesCalculator"
 

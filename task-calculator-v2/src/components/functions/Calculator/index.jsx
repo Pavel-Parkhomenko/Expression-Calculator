@@ -4,7 +4,6 @@ import {History} from "@/components/functions/History"
 import {KeyPad} from "@/components/functions/KeyPad"
 import {FlexColumnStyled, FlexRowStyled} from "@/components/Styles/stylesCalculator"
 
-
 export function Calculator () {
   return (
     <FlexRowStyled>
