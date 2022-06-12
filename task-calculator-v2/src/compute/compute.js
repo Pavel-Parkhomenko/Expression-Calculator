@@ -10,13 +10,16 @@ const numbers = []
 const operations = []
 
 export function calculator(func) {
-  let fs = func.split(/\s+/g).filter(x => x !== '').map(x => /^\.\d+$/.test(x) ? '0' + x : x)
+  let fs = func
+    .split(/\s+/g)
+    .filter(symbol => symbol !== '')
+    .map(symbol => /^\.\d+$/.test(symbol) ? '0' + symbol : symbol)
 
   const expressionArray = []
-  console.log('fs', fs)
 
   for(let i = 0; i < fs.length; i++){
-    if(fs[i] === '(' && fs[i + 1] === "-" && (/\d+/.test(fs[i + 2]) || /^\.\d+$/.test(fs[i + 2])) && fs[i + 3] === ')'){
+    if(fs[i] === '(' && fs[i + 1] === "-" && (/\d+/.test(fs[i + 2]) ||
+      /^\.\d+$/.test(fs[i + 2])) && fs[i + 3] === ')'){
       expressionArray.push('-' + fs[i + 2])
       i += 3
     }
@@ -87,15 +90,12 @@ function checkPriority(operation) {
 }
 
 function calculate() {
-
-  console.log(numbers)
-
-  const oper = operations.pop()
-  if(oper === '(') return
+  const operation = operations.pop()
+  if(operation === '(') return
   const n1 = parseFloat(numbers.pop())
   calc.value = parseFloat(numbers.pop())
 
-  switch (oper) {
+  switch (operation) {
     case '-':
       calc.execute(new SubtractCommand(n1))
       numbers.push(calc.value)

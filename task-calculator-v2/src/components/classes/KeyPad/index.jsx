@@ -9,8 +9,9 @@ import {
   changeSign,
 } from "@/redux/displaySlice"
 import { Button } from "@/components/classes/Button"
-import { BUTTONS_OPERATIONS, BUTTONS_NUMBERS, OPERATIONS } from "@/constants"
+import { BUTTONS_OPERATIONS, BUTTONS_NUMBERS } from "@/constants"
 import { addHistory } from "@/redux/historySlice"
+import { checkInputExpression } from "@/helpers"
 
 class KeyPad extends React.Component {
   constructor(props) {
@@ -37,9 +38,7 @@ class KeyPad extends React.Component {
         this.props.changeSign()
         break
       default:
-        if (OPERATIONS.includes(key) && OPERATIONS.includes(this.prevKey.current)) return
-        if (this.prevKey.current === '' && OPERATIONS.includes(key)) return
-        if (this.prevKey.current === '.' && key === '.') return
+        if(!checkInputExpression(this.prevKey.current, key)) return
         this.props.addToDisplay(key)
         this.prevKey.current = key
     }

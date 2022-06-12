@@ -17,10 +17,12 @@ const displaySlice = createSlice({
     },
 
     removeOneFromDisplay(state) {
-      state.display = state.display.substring(0, state.display.length - 1)
-      state.expression = state.display
-        ? state.expression.substring(0, state.expression.length - 1)
-        : state.expression
+      console.log(state.expression)
+      if(state.display){
+        state.display = state.display.substring(0, state.display.length - 1)
+        state.expression = state.expression.substring(0, state.expression.length - 1)
+      }
+      console.log(state.expression)
     },
 
     removeAllFromDisplay(state) {
@@ -40,8 +42,8 @@ const displaySlice = createSlice({
         ? calculator(replaceOperation(state.expression))
         : "Ошибка"
 
-      if(state.answer === "Ошибка")
-        state.display = state.answer
+      if(Number.isNaN(state.answer))
+        state.display = "Ошибка"
       else if(/^-\d+\.\d{3,}$|^\d+\.\d{3,}$/.test(state.answer))
         state.display = state.answer.toFixed(3)
       else state.display = state.answer

@@ -8,9 +8,10 @@ import {
   changeSign,
 } from "@/redux/displaySlice"
 import { Button } from "@/components/functions/Button"
-import { BUTTONS_OPERATIONS, BUTTONS_NUMBERS, OPERATIONS } from "@/constants"
+import { BUTTONS_OPERATIONS, BUTTONS_NUMBERS } from "@/constants"
 import { addHistory } from "@/redux/historySlice"
 import { ControlPanelStyled, KeyGridNumber, KeyGridOperations } from "@/components/Styles/stylesKeypad"
+import { checkInputExpression } from "@/helpers"
 
 export function KeyPad() {
 
@@ -24,6 +25,7 @@ export function KeyPad() {
     switch (key) {
       case "C":
         dispatch(removeOneFromDisplay())
+        prevKey.current = "0"
         break
       case "CE":
         dispatch(removeAllFromDisplay())
@@ -36,9 +38,7 @@ export function KeyPad() {
         dispatch(changeSign())
         break
       default: {
-        if(OPERATIONS.includes(key) && (OPERATIONS.includes(prevKey.current) || prevKey.current === '=')) return
-        if(prevKey.current === '' && OPERATIONS.includes(key)) return
-        if(prevKey.current === '.' && key === '.') return
+        if(!checkInputExpression(prevKey.current, key)) return
         dispatch(addToDisplay(key))
         prevKey.current = key
       }

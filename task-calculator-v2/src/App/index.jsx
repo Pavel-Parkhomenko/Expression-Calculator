@@ -19,8 +19,6 @@ import theme from "@/theme"
 
 export const App = () => {
   const myTheme = useSelector(state => state.theme.theme)
-  console.log(myTheme === THEME_LIGHT)
-
   return (
     <ThemeProvider theme={myTheme === THEME_LIGHT
       ? { ...theme, ...LIGHT_COLORS }
