@@ -10,4 +10,9 @@ export const ButtonStyled = styled.button`
   :hover {
     background-color: ${({ theme }) => theme.textColor.muted};
   }
+
+  @media screen and (max-width: 700px){
+    height: ${({ theme }) => theme.size.xs}px;
+    width: ${({ theme }) => theme.size.xs}px;
+  }
 `

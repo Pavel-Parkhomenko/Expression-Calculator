@@ -29,10 +29,5 @@ export const ControlPanelStyled = styled.div`
     & >:last-child{
       margin-top: ${({ theme }) => theme.spaces[2]}px;
     }
-    button{
-      width: 50%;
-      height: ${({ theme }) => theme.size.small}px;
-      font-size: ${({ theme }) => theme.fontSizes[0]}px;
-    }
   }
 `

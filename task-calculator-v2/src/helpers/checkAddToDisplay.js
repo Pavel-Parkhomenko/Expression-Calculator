@@ -1,14 +1,12 @@
 export const checkAddToDisplay = ({ expression, display, answer }, payload) => {
   if (answer === display) display = ''
-  if (display === 'Ошибка') display = payload
+  else if(/^.\d+$|^\d+\.\d+$/.test(display) && payload === '.') return { expression, display }
+  else if (display === 'Ошибка') display = payload
   else if (/[+/%*]/.test(expression[expression.length - 1]))
     display = payload
-  else if (/^\d+-|^\(-\d+/.test(display))
+  else if (/^\d+-|^\(-\d+\)|^.\d+-/.test(display))
     display = payload
-  else if (expression[expression.length - 2] === '(' &&
-    expression[expression.length - 1] === '-' &&
-    expression[expression.length - 1] === ')')
-    display = payload
+
   else display = display + payload
 
   expression = expression + payload

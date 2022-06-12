@@ -25,7 +25,6 @@ export const App = () => {
     <ThemeProvider theme={myTheme === THEME_LIGHT
       ? { ...theme, ...LIGHT_COLORS }
       : { ...theme, ...DARK_COLORS }}>
-
       <GlobalStyles />
       <Suspense fallback={<Loader />}>
         <HashRouter>

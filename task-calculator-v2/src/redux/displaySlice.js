@@ -42,7 +42,7 @@ const displaySlice = createSlice({
 
       if(state.answer === "Ошибка")
         state.display = state.answer
-      else if(/^-\d+\.\d+$|^\d+\.\d{3,}$/.test(state.answer))
+      else if(/^-\d+\.\d{3,}$|^\d+\.\d{3,}$/.test(state.answer))
         state.display = state.answer.toFixed(3)
       else state.display = state.answer
 

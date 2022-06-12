@@ -11,10 +11,14 @@ export const HistoryStyled = styled.div`
 export const TitleStyled = styled.h3`
   color: ${({ theme }) => theme.colors.textColor};
   margin-bottom: ${({ theme }) => theme.spaces[1]}px;
+  cursor: pointer;
+
+  :hover{
+    color: ${({ theme }) => theme.colors.hoverColor};
+  }
 `
 
 export const ButtonStyled = styled.button`
-  background-color: ${({ theme }) => theme.textColor.info};
   margin-bottom: ${({ theme }) => theme.spaces[1]}px;
   width: 50%;
 `

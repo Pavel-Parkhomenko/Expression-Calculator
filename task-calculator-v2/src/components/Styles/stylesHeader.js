@@ -8,6 +8,10 @@ export const HeaderDiv = styled.div`
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
+
+  @media screen and (max-width: 700px){
+    font-size: ${({ theme }) => theme.fontSizes[0] - 2}px;
+  }
 `
 
 export const LinkStyled = styled(Link)`
@@ -32,6 +36,7 @@ export const Title = styled.h1`
   color: ${({ theme }) => theme.textColor.white};
   margin-left: ${({ theme }) => theme.spaces[4]}px;
 `
+
 export const Menu = styled.div`
   display: flex;
   flex-direction: row;
