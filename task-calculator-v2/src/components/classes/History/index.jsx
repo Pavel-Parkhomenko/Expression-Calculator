@@ -1,5 +1,5 @@
 import React from 'react'
-import { ButtonStyled, HistoryInfoStyled, HistoryStyled, TitleStyled } from "@/components/Styles/stylesHistory"
+import { HistoryInfoStyled, HistoryStyled, TitleStyled } from "@/components/Styles/stylesHistory"
 import { connect } from 'react-redux'
 
 class History extends React.Component {
@@ -19,10 +19,9 @@ class History extends React.Component {
   render() {
     return (
       <HistoryStyled>
-        <TitleStyled>History</TitleStyled>
-        <ButtonStyled onClick={this.handleHistory}>
-          history
-        </ButtonStyled>
+        <TitleStyled onClick={this.handleHistory}>
+          {this.state.isOpenHistory ? "History open" : "History close"}
+        </TitleStyled>
         {this.state.isOpenHistory
           ? this.props.history.map((item, ind) => <HistoryInfoStyled key={ind}>{item}</HistoryInfoStyled>)
           : null
