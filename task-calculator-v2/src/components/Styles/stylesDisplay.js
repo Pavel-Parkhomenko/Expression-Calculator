@@ -9,8 +9,8 @@ export const DisplayStyled = styled.div`
   justify-content: right;
   padding-right: ${({ theme }) => theme.spaces[1]}px;
 
-  @media screen and (max-width: 700px){
+  @media screen and (max-width: 700px) {
     font-size: ${({ theme }) => theme.size.xs / 2}px;
     height: ${({ theme }) => theme.size.small / 2}px;
-}
+  }
 `
