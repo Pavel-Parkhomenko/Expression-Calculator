@@ -1,6 +1,6 @@
 export const checkAddToDisplay = ({ expression, display, answer }, payload) => {
   if (answer === display) display = ''
-  if(/^.\d+$|^\d+\.\d+$/.test(display) && payload === '.') return { expression, display }
+  if(/^\.\d+$|^\d+\.\d+$/.test(display) && payload === '.') return { expression, display }
   if (display === 'Ошибка') display = payload
   else if (/[+/%*]/.test(expression.slice(-1)))
     display = payload
