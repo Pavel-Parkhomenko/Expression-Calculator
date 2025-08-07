@@ -42,11 +42,6 @@
 */
 
 /*
- * This is a dummy function to check if the function name has been altered by minification.
- * If the function has been minified and NODE_ENV !== 'production', warn the user.
- */
-
-/*
  ComponentStyle is all the CSS-specific stuff, not
  the React-specific stuff.
  */
@@ -60,6 +55,8 @@ object-assign
 (c) Sindre Sorhus
 @license MIT
 */
+
+/* #__PURE__ */
 
 /* 0 */
 
@@ -197,6 +194,22 @@ object-assign
 
 /* 7 */
 
+/* 70 */
+
+/* 71 */
+
+/* 72 */
+
+/* 73 */
+
+/* 74 */
+
+/* 75 */
+
+/* 76 */
+
+/* 77 */
+
 /* 8 */
 
 /* 9 */
@@ -272,6 +285,8 @@ object-assign
 /* adds a new ID:name pairing to a names dictionary */
 
 /* any error indicates an invalid rule */
+
+/* binding */
 
 /* caching layer checking id+name to already have a corresponding tag and injected rules */
 
@@ -383,6 +398,14 @@ object-assign
 
 /* this is used for not reinjecting rules via hasNameForId() */
 
+/* unused harmony export EnhancerArray */
+
+/* unused harmony export Immer */
+
+/* unused harmony export MiddlewareArray */
+
+/* unused harmony export SHOULD_AUTOBATCH */
+
 /* unused harmony export ServerStyleSheet */
 
 /* unused harmony export StyleSheetConsumer */
@@ -391,17 +414,117 @@ object-assign
 
 /* unused harmony export StyleSheetManager */
 
+/* unused harmony export TaskAbortError */
+
 /* unused harmony export ThemeConsumer */
 
 /* unused harmony export ThemeContext */
 
 /* unused harmony export __DO_NOT_USE_OR_YOU_WILL_BE_HAUNTED_BY_SPOOKY_GHOSTS */
 
+/* unused harmony export addListener */
+
+/* unused harmony export applyPatches */
+
+/* unused harmony export autoBatchEnhancer */
+
+/* unused harmony export castDraft */
+
+/* unused harmony export castImmutable */
+
+/* unused harmony export clearAllListeners */
+
+/* unused harmony export createAction */
+
+/* unused harmony export createActionCreatorInvariantMiddleware */
+
+/* unused harmony export createAsyncThunk */
+
+/* unused harmony export createDraft */
+
+/* unused harmony export createDraftSafeSelector */
+
+/* unused harmony export createEntityAdapter */
+
+/* unused harmony export createImmutableStateInvariantMiddleware */
+
+/* unused harmony export createListenerMiddleware */
+
+/* unused harmony export createReducer */
+
+/* unused harmony export createSerializableStateInvariantMiddleware */
+
 /* unused harmony export css */
+
+/* unused harmony export enableAllPlugins */
+
+/* unused harmony export enableMapSet */
+
+/* unused harmony export enablePatches */
+
+/* unused harmony export findNonSerializableValue */
+
+/* unused harmony export finishDraft */
+
+/* unused harmony export freeze */
+
+/* unused harmony export getDefaultMiddleware */
+
+/* unused harmony export getType */
+
+/* unused harmony export immerable */
+
+/* unused harmony export isAction */
+
+/* unused harmony export isActionCreator */
+
+/* unused harmony export isAllOf */
+
+/* unused harmony export isAnyOf */
+
+/* unused harmony export isAsyncThunkAction */
+
+/* unused harmony export isFluxStandardAction */
+
+/* unused harmony export isFulfilled */
+
+/* unused harmony export isImmutableDefault */
+
+/* unused harmony export isPending */
+
+/* unused harmony export isPlain */
+
+/* unused harmony export isPlainObject */
+
+/* unused harmony export isRejected */
+
+/* unused harmony export isRejectedWithValue */
 
 /* unused harmony export isStyledComponent */
 
 /* unused harmony export keyframes */
+
+/* unused harmony export miniSerializeError */
+
+/* unused harmony export nanoid */
+
+/* unused harmony export nothing */
+
+/* unused harmony export original */
+
+/* unused harmony export prepareAutoBatched */
+
+/* unused harmony export produce */
+
+/* unused harmony export produceWithPatches */
+
+/* unused harmony export removeListener */
+
+/* unused harmony export setAutoFreeze */
+
+/* unused harmony export setUseProxies */
+
+/* unused harmony export unwrapResult */
 
 /* unused harmony export withTheme */
 
@@ -570,6 +693,28 @@ and limitations under the License.
    */
 
 /**
+  Webpack + React 17 fails to compile on any of the following because webpack
+  complains that `startTransition` doesn't exist in `React`:
+  * import { startTransition } from "react"
+  * import * as React from from "react";
+    "startTransition" in React ? React.startTransition(() => setState()) : setState()
+  * import * as React from from "react";
+    "startTransition" in React ? React["startTransition"](() => setState()) : setState()
+
+  Moving it to a constant such as the following solves the Webpack/React 17 issue:
+  * import * as React from from "react";
+    const START_TRANSITION = "startTransition";
+    START_TRANSITION in React ? React[START_TRANSITION](() => setState()) : setState()
+
+  However, that introduces webpack/terser minification issues in production builds
+  in React 18 where minification/obfuscation ends up removing the call of
+  React.startTransition entirely from the first half of the ternary.  Grabbing
+  this exported reference once up front resolves that issue.
+
+  See https://github.com/remix-run/react-router/issues/10579
+*/
+
+/**
  * @deprecated
  *
  * **We recommend using the `configureStore` method
@@ -601,17 +746,57 @@ and limitations under the License.
  */
 
 /**
- * A <Router> that stores all entries in memory.
+ * @private
  *
- * @see https://reactrouter.com/docs/en/v6/api#memoryrouter
+ * When processing relative navigation we want to ignore ancestor routes that
+ * do not contribute to the path, such that index/pathless layout routes don't
+ * interfere.
+ *
+ * For example, when moving a route element into an index route and/or a
+ * pathless layout route, relative link behavior contained within should stay
+ * the same.  Both of the following examples should link back to the root:
+ *
+ *   <Route path="/">
+ *     <Route path="accounts" element={<Link to=".."}>
+ *   </Route>
+ *
+ *   <Route path="/">
+ *     <Route path="accounts">
+ *       <Route element={<AccountsLayout />}>       // <-- Does not contribute
+ *         <Route index element={<Link to=".."} />  // <-- Does not contribute
+ *       </Route
+ *     </Route>
+ *   </Route>
  */
 
 /**
- * A PathPattern is used to match on some portion of a URL pathname.
+ * @private
+ * Indirection to leverage useAsyncValue for a render-prop API on `<Await>`
  */
 
 /**
- * A RouteMatch contains info about how a route matched a URL.
+ * @private
+ */
+
+/**
+ * @remix-run/router v1.23.0
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+
+/**
+ * A Navigator is a "location changer"; it's how you get to different locations.
+ *
+ * Every history instance conforms to the Navigator interface, but the
+ * distinction is useful primarily when it comes to the low-level `<Router>` API
+ * where both the location and a navigator must be provided separately in order
+ * to avoid "tearing" that may occur in a suspense-enabled app if the action
+ * and/or location were to be read directly from the history instance.
  */
 
 /**
@@ -627,10 +812,10 @@ and limitations under the License.
  */
 
 /**
- * A container for a nested tree of <Route> elements that renders the branch
+ * A container for a nested tree of `<Route>` elements that renders the branch
  * that best matches the current location.
  *
- * @see https://reactrouter.com/docs/en/v6/api#routes
+ * @see https://reactrouter.com/v6/components/routes
  */
 
 /**
@@ -718,11 +903,25 @@ and limitations under the License.
  */
 
 /**
+ * Actions represent the type of change to a location value.
+ */
+
+/**
  * Adapted from React: https://github.com/facebook/react/blob/master/packages/shared/formatProdErrorMessage.js
  *
  * Do not require this module directly! Use normal throw error calls. These messages will be replaced with error codes
  * during build.
  * @param {number} code
+ */
+
+/**
+ * Check if the given error is an ErrorResponse generated from a 4xx/5xx
+ * Response thrown from an action/loader
+ */
+
+/**
+ * Component to use for rendering lazily loaded data from returning defer()
+ * in a loader function
  */
 
 /**
@@ -734,6 +933,21 @@ and limitations under the License.
  * @returns {Function} A function obtained by composing the argument functions
  * from right to left. For example, compose(f, g, h) is identical to doing
  * (...args) => f(g(h(...args))).
+ */
+
+/**
+ * Computes all combinations of optional path segments for a given path,
+ * excluding combinations that are ambiguous and of lower priority.
+ *
+ * For example, `/one/:two?/three/:four?/:five?` explodes to:
+ * - `/one/three`
+ * - `/one/:two/three`
+ * - `/one/three/:four`
+ * - `/one/three/:five`
+ * - `/one/:two/three/:four`
+ * - `/one/:two/three/:five`
+ * - `/one/three/:four/:five`
+ * - `/one/:two/three/:four/:five`
  */
 
 /**
@@ -751,6 +965,10 @@ and limitations under the License.
 /**
  * Create an error file out of errors.md for development and a simple web link to the full errors
  * in production mode.
+ */
+
+/**
+ * Creates a Location object with a unique key from the given Path
  */
 
 /**
@@ -785,11 +1003,33 @@ and limitations under the License.
  */
 
 /**
+ * Creates a URLSearchParams object using the given initializer.
+ *
+ * This is identical to `new URLSearchParams(init)` except it also
+ * supports arrays as values in the object form of the initializer
+ * instead of just strings. This is convenient when you need multiple
+ * values for a given key, but don't want to use an array initializer.
+ *
+ * For example, instead of:
+ *
+ *   let searchParams = new URLSearchParams([
+ *     ['sort', 'name'],
+ *     ['sort', 'price']
+ *   ]);
+ *
+ * you can do:
+ *
+ *   let searchParams = createSearchParams({
+ *     sort: ['name', 'price']
+ *   });
+ */
+
+/**
  * Creates a route config from a React "children" object, which is usually
  * either a `<Route>` element or an array of them. Used internally by
  * `<Routes>` to create a route config from its children.
  *
- * @see https://reactrouter.com/docs/en/v6/api#createroutesfromchildren
+ * @see https://reactrouter.com/v6/utils/create-routes-from-children
  */
 
 /**
@@ -811,14 +1051,16 @@ and limitations under the License.
 
 /**
  * Creates a string URL path from the given pathname, search, and hash components.
- *
- * @see https://github.com/remix-run/history/tree/main/docs/api-reference.md#createpath
  */
 
 /**
  * Declares an element that should be rendered at a certain URL path.
  *
- * @see https://reactrouter.com/docs/en/v6/api#route
+ * @see https://reactrouter.com/v6/components/route
+ */
+
+/**
+ * For browser-based histories, we combine the state and key into an object
  */
 
 /**
@@ -881,14 +1123,7 @@ and limitations under the License.
 /**
  * Matches the given routes to a location and returns the match data.
  *
- * @see https://reactrouter.com/docs/en/v6/api#matchroutes
- */
-
-/**
- * Memory history stores the current location in memory. It is designed for use
- * in stateful non-browser environments like tests and React Native.
- *
- * @see https://github.com/remix-run/history/tree/main/docs/api-reference.md#creatememoryhistory
+ * @see https://reactrouter.com/v6/utils/match-routes
  */
 
 /**
@@ -903,29 +1138,27 @@ and limitations under the License.
 
 /**
  * Parses a string URL path into its separate pathname, search, and hash components.
- *
- * @see https://github.com/remix-run/history/tree/main/docs/api-reference.md#parsepath
  */
 
 /**
  * Performs pattern matching on a URL pathname and returns information about
  * the match.
  *
- * @see https://reactrouter.com/docs/en/v6/api#matchpath
+ * @see https://reactrouter.com/v6/utils/match-path
  */
 
 /**
  * Provides location context for the rest of the app.
  *
- * Note: You usually won't render a <Router> directly. Instead, you'll render a
- * router that is more specific to your environment such as a <BrowserRouter>
- * in web browsers or a <StaticRouter> for server rendering.
+ * Note: You usually won't render a `<Router>` directly. Instead, you'll render a
+ * router that is more specific to your environment such as a `<BrowserRouter>`
+ * in web browsers or a `<StaticRouter>` for server rendering.
  *
- * @see https://reactrouter.com/docs/en/v6/api#router
+ * @see https://reactrouter.com/v6/router-components/router
  */
 
 /**
- * React Router DOM v6.3.0
+ * React Router DOM v6.30.1
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -936,7 +1169,7 @@ and limitations under the License.
  */
 
 /**
- * React Router v6.3.0
+ * React Router v6.30.1
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -953,20 +1186,30 @@ and limitations under the License.
 /**
  * Resolves the pathname of the given `to` value against the current location.
  *
- * @see https://reactrouter.com/docs/en/v6/api#useresolvedpath
+ * @see https://reactrouter.com/v6/hooks/use-resolved-path
+ */
+
+/**
+ * Returns a path with params interpolated.
+ *
+ * @see https://reactrouter.com/v6/utils/generate-path
  */
 
 /**
  * Returns a resolved path object relative to the given pathname.
  *
- * @see https://reactrouter.com/docs/en/v6/api#resolvepath
+ * @see https://reactrouter.com/v6/utils/resolve-path
  */
 
 /**
- * Returns an imperative method for changing the location. Used by <Link>s, but
+ * Returns an imperative method for changing the location. Used by `<Link>`s, but
  * may also be used by other elements to change the location.
  *
- * @see https://reactrouter.com/docs/en/v6/api#usenavigate
+ * @see https://reactrouter.com/v6/hooks/use-navigate
+ */
+
+/**
+ * Returns the ID for the nearest contextual route
  */
 
 /**
@@ -977,30 +1220,40 @@ and limitations under the License.
  * "routing" in your app, and we'd like to know what your use case is. We may
  * be able to provide something higher-level to better suit your needs.
  *
- * @see https://reactrouter.com/docs/en/v6/api#uselocation
+ * @see https://reactrouter.com/v6/hooks/use-location
  */
 
 /**
  * Returns the current navigation action which describes how the router came to
  * the current location, either by a pop, push, or replace on the history stack.
  *
- * @see https://reactrouter.com/docs/en/v6/api#usenavigationtype
+ * @see https://reactrouter.com/v6/hooks/use-navigation-type
  */
 
 /**
  * Returns the element of the route that matched the current location, prepared
  * with the correct context to render the remainder of the route tree. Route
- * elements in the tree must render an <Outlet> to render their child route's
+ * elements in the tree must render an `<Outlet>` to render their child route's
  * element.
  *
- * @see https://reactrouter.com/docs/en/v6/api#useroutes
+ * @see https://reactrouter.com/v6/hooks/use-routes
  */
 
 /**
  * Returns the full href for the given "to" value. This is useful for building
  * custom links that are also accessible and preserve right-click behavior.
  *
- * @see https://reactrouter.com/docs/en/v6/api#usehref
+ * @see https://reactrouter.com/v6/hooks/use-href
+ */
+
+/**
+ * Returns the happy-path data from the nearest ancestor `<Await />` value
+ */
+
+/**
+ * Returns the nearest ancestor Route error, which could be a loader/action
+ * error or a render error.  This is intended to be called from your
+ * ErrorBoundary/errorElement to display a proper error message.
  */
 
 /**
@@ -1011,9 +1264,9 @@ and limitations under the License.
  */
 
 /**
- * Returns true if this component is a descendant of a <Router>.
+ * Returns true if this component is a descendant of a `<Router>`.
  *
- * @see https://reactrouter.com/docs/en/v6/api#useinroutercontext
+ * @see https://reactrouter.com/v6/hooks/use-in-router-context
  */
 
 /**
@@ -1073,16 +1326,13 @@ and limitations under the License.
  */
 
 /**
+ * Stable version of useNavigate that is used when we are in the context of
+ * a RouterProvider.
+ */
+
+/**
  * TODO: Explore using CSS.escape when it becomes more available
  * in evergreen browsers.
- */
-
-/**
- * The interface for the navigate() function returned from useNavigate().
- */
-
-/**
- * The public API for rendering a history-aware <a>.
  */
 
 /**
@@ -1090,6 +1340,14 @@ and limitations under the License.
  * For any unknown actions, you must return the current state.
  * If the current state is undefined, you must return the initial state.
  * Do not reference these action types directly in your code.
+ */
+
+/**
+ * This is a shortcut for creating `application/json` responses. Converts `data`
+ * to JSON and sets the `Content-Type` header.
+ *
+ * @deprecated The `json` method is deprecated in favor of returning raw objects.
+ * This method will be removed in v7.
  */
 
 /**
@@ -1166,6 +1424,12 @@ and limitations under the License.
 
 /***/
 
+/*break*/
+
+/*return*/
+
+/*yield*/
+
 //
 
 // 
@@ -1176,11 +1440,21 @@ and limitations under the License.
 
 //    the developer that their mapToProps function is not returning a valid result.
 
+//   parentPathnameBase: "/descendant/a%b"
+
+//   pathname:           "/descendant/a%25b/match"
+
 //  * Detects whether the mapToProps function being called depends on props, which
 
 //  * On first call, handles mapToProps if returns another function, and treats that
 
 //  * On first call, verifies the first result is a plain object, in order to warn
+
+// "/*" and we'd expect /#something to 404 in a hash router app.
+
+// "go up one route" instead of "go up one URL segment".  This is a key
+
+// "to" value instead of a "href".
 
 // $FlowFixMe
 
@@ -1190,6 +1464,8 @@ and limitations under the License.
 
 // - This render may have been triggered by a Redux store update that produced new child props
 
+// /user-preferences since `-` counts as a word boundary.
+
 // @font-face, @page
 
 // @import
@@ -1197,6 +1473,8 @@ and limitations under the License.
 // @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
 
 // @see https://github.com/webpack-contrib/style-loader/issues/177
+
+// @ts-expect-error
 
 // @ts-ignore
 
@@ -1210,11 +1488,13 @@ and limitations under the License.
 
 // Adapted from convert-source-map (MIT)
 
-// Add the children before adding this route to the array so we traverse the
+// Add the children before adding this route to the array, so we traverse the
 
-// Additionally, allow paths starting with `.`, `-`, `~`, and url-encoded entities,
+// All child paths with the prefix.  Do this for all children before the
 
 // Allow injecting another batching function later
+
+// And the direct substring removal approach won't work :/
 
 // Any reducers that existed in both the new and old rootReducer
 
@@ -1224,7 +1504,11 @@ and limitations under the License.
 
 // Avoid failures from read-only properties
 
+// Based on that, if `memoizeOptions` _is_ an array, we assume it's a full
+
 // Based on the previous check, one of these must be true
+
+// But that's a pretty big refactor to the current test suite so going to
 
 // But, if we have new wrapper props, those might change the child props, so we have to recalculate things.
 
@@ -1238,13 +1522,17 @@ and limitations under the License.
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
 
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/toPrimitive.js
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/toPropertyKey.js
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/typeof.js
+
 // CONCATENATED MODULE: ./node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.esm.js
 
 // CONCATENATED MODULE: ./node_modules/@emotion/memoize/dist/memoize.browser.esm.js
 
-// CONCATENATED MODULE: ./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js
-
-// CONCATENATED MODULE: ./node_modules/immer/dist/immer.esm.js
+// CONCATENATED MODULE: ./node_modules/@remix-run/router/dist/router.js
 
 // CONCATENATED MODULE: ./node_modules/is-what/dist/index.esm.js
 
@@ -1292,13 +1580,13 @@ and limitations under the License.
 
 // CONCATENATED MODULE: ./node_modules/react-redux/es/utils/useIsomorphicLayoutEffect.js
 
-// CONCATENATED MODULE: ./node_modules/react-router-dom/index.js
+// CONCATENATED MODULE: ./node_modules/react-router-dom/dist/index.js
 
-// CONCATENATED MODULE: ./node_modules/react-router/index.js
-
-// CONCATENATED MODULE: ./node_modules/redux-thunk/es/index.js
+// CONCATENATED MODULE: ./node_modules/react-router/dist/index.js
 
 // CONCATENATED MODULE: ./node_modules/redux/es/redux.js
+
+// CONCATENATED MODULE: ./node_modules/reselect/es/index.js
 
 // CONCATENATED MODULE: ./src/App/index.jsx
 
@@ -1352,23 +1640,23 @@ and limitations under the License.
 
 // CONCATENATED MODULE: ./src/redux/displaySlice.js
 
-// CONCATENATED MODULE: ./src/redux/historySlice.js
-
-// CONCATENATED MODULE: ./src/redux/store.js
-
 // CONCATENATED MODULE: ./src/theme.js
 
-// Cancel the event.
+// Cached entry not at top of cache, move it to the top
 
 // Capture values for checking if and when this component unmounts
 
 // Check if module is in cache
 
-// Chrome (and legacy IE) requires returnValue to be set.
-
 // Combine passed cssRules with previously deferred CSS rules
 
+// Conditional usage is OK here because the usage of a data router is static
+
+// Core Web Vitals Technology Report.  This way they can configure the `wappalyzer`
+
 // Create a new module (and put it into the cache)
+
+// Create react-specific types from the agnostic types in @remix-run/router to
 
 // DCE check should happen before ReactDOM bundle executes so that
 
@@ -1378,19 +1666,31 @@ and limitations under the License.
 
 // Detect buggy property enumeration order in older V8 versions.
 
+// Determine the remaining pathname by removing the # of URL segments the
+
+// Determine which set of options we're using. Prefer options passed directly,
+
 // DevTools can report bad minification during injection.
 
 // DevTools shouldn't crash React, no matter what.
 
 // Distinguish between actual "data" props that were passed to the wrapper component,
 
+// Do this in a for loop (and not a `forEach` or an `every`) so we can determine equality as fast as possible.
+
+// Don't bail if we have data router errors so we can render them in the
+
+// Don't bail if we're initializing with partial hydration and we have
+
 // Don't pass through non HTML tags through to HTML elements
 
 // ESM COMPAT FLAG
 
+// EXPORTS
+
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/slicedToArray.js
 
@@ -1400,17 +1700,23 @@ and limitations under the License.
 
 // EXTERNAL MODULE: ./node_modules/react/index.js
 
-// Each leading .. segment means "go up one route" instead of "go up one
-
-// Empty strings should be treated the same as / paths
+// EXTERNAL MODULE: ./node_modules/redux/es/redux.js + 5 modules
 
 // Enable batched updates in our subscriptions for use
 
-// Ensure the pathname has a trailing slash if the original to value had one.
+// Encode a Location the same way window.location would
+
+// Ensure the pathname has a trailing slash if the original "to" had one
+
+// ErrorBoundary/errorElement on this route.  Otherwise let it bubble up to
 
 // Execute the module function
 
+// Export a global property onto the window for React Router detection by the
+
 // Exports
+
+// External hooks
 
 // Flag the module as loaded
 
@@ -1418,11 +1724,17 @@ and limitations under the License.
 
 // Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
 
-// HOOKS
+// HEY YOU! DON'T TOUCH THIS VARIABLE!
+
+// Hash URL should always have a leading / just like window.location.pathname
 
 // Helper to call a given function, only once
 
 // If React sees the exact same element reference as last time, it bails out of re-rendering
+
+// If a pathname is explicitly provided in `to`, it should be relative to the
+
+// If our path is non-empty and contains anything beyond an initial slash,
 
 // If pure is true, the selector returned by selectorFactory will memoize its results,
 
@@ -1432,25 +1744,37 @@ and limitations under the License.
 
 // If the child props haven't changed, nothing to do here - cascade the subscription update
 
+// If the exception is because `state` can't be serialized, let that throw
+
 // If the render was from a store update, clear out that reference and cascade the subscriber update
 
-// If there are more ".." segments than parent routes, resolve relative to
+// If the result func is actually an _object_, assume it's our options object
 
 // If this "action" is really a function, call it and return the result.
+
+// If this is a root navigation, then we navigate to the raw basename
+
+// If this was a render error, we put it in a RouteError context inside
 
 // If two routes are siblings, we should try to match the earlier sibling
 
 // If we aren't running in "pure" mode, we don't want to memoize values.
 
+// If we have data errors, trim matches to the highest error boundary
+
 // If we have new child props, and the same wrapper props, we know we should use the new child props as-is.
 
 // If we're in "pure" mode, ensure our wrapper component only re-renders when incoming props have changed.
 
+// If we're in a partial hydration mode, detect if we need to render down to
+
+// If we're not changing locations, preserve the location but still surface
+
 // If we're not subscribed to the store, nothing to do here
 
-// Ignore everything but left clicks
+// If we're operating within a basename, prepend it to the pathname prior
 
-// Ignore extraneous hashchange events.
+// Ignore everything but left clicks
 
 // Ignore non-elements. This allows people to more easily inline
 
@@ -1460,9 +1784,21 @@ and limitations under the License.
 
 // In that case, throw the error from here so it doesn't get lost.
 
+// Incoming pathnames are generally encoded from either window.location
+
+// Index should only be null when we initialize. If not, it's because the
+
 // Inlined / shortened version of `kindOf` from https://github.com/jonschlinkert/kind-of
 
 // Inlined version of the `symbol-observable` polyfill
+
+// Intepret empty string as omitting an optional segment
+
+// Internal implementation with accept optional param for RouterProvider usage
+
+// Internal version with hookName-aware debugging
+
+// It is replaced with the proper version at build time via a babel plugin in
 
 // It's possible that we caught an error due to a bad mapState function, but the
 
@@ -1472,11 +1808,17 @@ and limitations under the License.
 
 // Load entry module and return exports
 
+// Manual definition of state and output arguments
+
 // Memoize the check that determines which context instance we should use.
 
 // Module
 
+// Mute warnings for calls to useNavigate in SSR environments
+
 // NOTE: We cannot mutate the deferred array itself as all clones
+
+// No entry found in cache, return sentinel
 
 // No need to subscribe a static component to theme changes, it won't change anything
 
@@ -1486,15 +1828,25 @@ and limitations under the License.
 
 // Object.prototype.hasOwnProperty.call
 
-// Otherwise, it doesn't really make sense to rank non-siblings by index,
+// Only data routers handle errors/fallbacks
 
-// Otherwise, match a word boundary or a proceeding /. The word boundary restricts
+// Only wrap in an error boundary within data router usages when we have an
+
+// Optional path segments are denoted by a trailing `?`
+
+// Otherwise look for errors from our data router state
+
+// Otherwise, it doesn't really make sense to rank non-siblings by index,
 
 // Otherwise, pass the action down the middleware chain as usual
 
 // Otherwise, put this component's subscription instance into context, so that
 
 // Our re-subscribe logic only runs when the store/subscription setup changes
+
+// Our types know better, but runtime JS may not!
+
+// Preserve trailing slashes on basename, so we can let the user control
 
 // Propagate any mapState/mapDispatch errors upwards
 
@@ -1504,19 +1856,25 @@ and limitations under the License.
 
 // Re-create this selector whenever the store changes.
 
+// Re-encode pathnames that were decoded inside matchRoutes
+
 // React currently throws a warning when using useLayoutEffect on the server.
 
 // React v16.11 and below
 
 // React v16.12 and above
 
-// Remove the beforeunload listener so the document may
+// Render the absolute href server- and client-side
+
+// Rendered into <a href> for relative URLs
+
+// Return the array of pathnames for the current route matches - used to
 
 // Return the exports of the module
 
-// Revert the POP
-
 // Routes without a path shouldn't ever match by themselves unless they are
+
+// Routing is relative to the current pathname if explicitly requested.
 
 // SVG
 
@@ -1524,11 +1882,19 @@ and limitations under the License.
 
 // Save references to the new child props.  Note that we track the "child props from store update"
 
-// See https://html.spec.whatwg.org/#unloading-documents
+// See https://bugzilla.mozilla.org/show_bug.cgi?id=878297
+
+// See: https://github.com/facebook/react/pull/26395
 
 // Set up refs to coordinate values between the subscription effect and the render logic
 
+// Short circuit here since if this happens on first render the navigate
+
 // Shorthands for all valid HTML Elements
+
+// Simplifying assumption: it's unlikely that the first options arg of the provided memoizer
+
+// So we may end up with:
 
 // So, we'll use the child props from store update only if the wrapper props are the same as last time.
 
@@ -1538,11 +1904,17 @@ and limitations under the License.
 
 // Special case to return head of iframe instead of iframe itself
 
+// Strip the protocol/origin/basename for same-origin absolute URLs
+
+// TODO Is unshift slow?
+
 // TODO We're reading the store directly in render() here. Bad idea?
 
 // TODO: Add more comments
 
-// TODO: Support forced reloading
+// TODO: Can this as be avoided?
+
+// TODO: This could be cleaned up.  push/replace should probably just take
 
 // TODO: overwrite in-place instead of remove+create?
 
@@ -1562,11 +1934,19 @@ and limitations under the License.
 
 // The thunk middleware looks for any functions that were passed to `store.dispatch`.
 
+// Then, if this is an optional value, add all child versions without
+
 // They are going to lose state here, but there is no real
 
 // This Subscription's source should match where store came from: props vs. context. A component
 
 // This action has a similiar effect to ActionTypes.INIT.
+
+// This error is thrown as a convenience, so you can more easily
+
+// This gives us a mechanism to recover from the error when the location changes.
+
+// This is because we can't guarantee that incoming/outgoing encodings/
 
 // This is used to make sure we don't warn about the same
 
@@ -1576,19 +1956,31 @@ and limitations under the License.
 
 // This will throw an exception if access to iframe is blocked
 
+// This works if eval is allowed (see CSP)
+
+// This works if the window reference is available
+
+// This works in non-strict mode
+
 // To avoid conditionally calling hooks, we fall back to a tiny wrapper
 
 // To get around it, we can conditionally useEffect on the server (no-op) and
 
 // To maintain the wrapperProps object reference, memoize this destructuring.
 
+// Track how deep we got in our render pass to emulate SSR componentDidCatch
+
+// Track the deepest fallback up until the first route without data
+
 // Transparently support React.Fragment and its children.
+
+// Treating this as a full URL will strip any trailing spaces so we need to
 
 // Tricky logic here:
 
-// UNUSED EXPORTS: concatArrays, merge
+// UNUSED EXPORTS: __DO_NOT_USE__ActionTypes, bindActionCreators, legacy_createStore
 
-// URL segment".  This is a key difference from how <a href> works and a
+// UNUSED EXPORTS: concatArrays, merge
 
 // UTILS
 
@@ -1598,7 +1990,13 @@ and limitations under the License.
 
 // Verify that the code above has been dead code eliminated (DCE'd).
 
+// We decode paths before matching on a per-segment basis with
+
 // We don't expect any of the above to throw, but better to be safe.
+
+// We found a cached entry
+
+// We found the first route that's not ready to render (waiting on
 
 // We memoize the elements for the rendered child component as an optimization.
 
@@ -1606,25 +2004,57 @@ and limitations under the License.
 
 // We need to compute the pathnameBase here using the raw splat value
 
+// We return undefined, instead of nothing here, so it's
+
+// We should be able to get rid of this once react 18.3 is released
+
 // We should still report in case we break this code.
 
 // We want to capture the wrapper props and child props we used for later comparisons
 
+// We want to leave trailing slash behavior in the user's control, so if they
+
+// Welcome to debugging history!
+
 // When a store is created, an "INIT" action is dispatched so that every
 
+// When a user passes in a `locationArg`, the associated routes need to
+
+// When matching to the end, ignore trailing slashes
+
 // When newVal is an object do the merge recursively
+
+// When v7_relativeSplatPath is enabled, use the full pathname for the leaf
 
 // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
 
 // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
 
+// When we get into an error state, the user will likely click "back" to the
+
+// Whether we're in an error state or not, we update the location in state
+
+// With relative="route" (the default), each leading .. segment means
+
 // __webpack_public_path__
+
+// `<Routes>`
+
+// `HydrateFallback`.  We only do this if `parentMatches` is empty so it
+
+// `["one", "", "three"]` corresponds to omitting `:two` from `/one/:two?/three` -> `/one/three`
 
 // `notifyNestedSubs` is duplicated to handle the case where the component is unmounted in
 
-// a push, so do the same here.
+// `to` values that do not provide a pathname. `to` can simply be a search or
+
+// a given HydrateFallback while we load the rest of the hydration data
+
+// a push, so do the same here unless the replace prop is explicitly set
 
 // about useLayoutEffect in SSR, so we try to detect environment and fall back to
+
+// align when it comes to encoded URI characters such as % and &.
 
 // all SC-specific things should not be hoisted
 
@@ -1632,11 +2062,27 @@ and limitations under the License.
 
 // allowing connectAdvanced's shouldComponentUpdate to return false if final
 
+// an ancestor ErrorBoundary/errorElement
+
+// an ancestor route
+
 // ancestor components re-render before descendants
+
+// and optional comparison of the result value with existing values
+
+// and pop the real result func off
 
 // and shouldn't be increasing the number of class names
 
 // and values needed to control behavior (forwarded refs, alternate context instances).
+
+// any new errors that may come through. We retain the existing error, we do
+
+// application, that will have no effect--the error page continues to display.
+
+// apply arguments instead of spreading and mutate a local list of params for performance.
+
+// apply arguments instead of spreading for performance.
 
 // as a ref instead of a useState/useReducer because we need a way to determine if that value has
 
@@ -1644,19 +2090,33 @@ and limitations under the License.
 
 // available, otherwise a store update may happen between render and the effect,
 
+// basename which allows the basename to have full control over the presence
+
+// be wrapped in a new `LocationContext.Provider` in order for `useLocation`
+
 // been processed.  If this went into useState/useReducer, we couldn't clear out the value without
 
 // behavior by simply putting routes with identical paths in the order they
 
-// but do not consume the character in the matched path so they can match against
+// boundary.  Use the pre-matched (or shimmed) matches
+
+// but fall back to options given to createSelectorCreator.
 
 // but since JS is single=threaded, we can rely on that to ensure
 
 // cached from whatever global is present so that test runners that stub it
 
+// case we should log a warning as it will result in bugs.
+
 // changed
 
 // changed since we began.
+
+// child sections interspersed where deeper optional segments are higher than
+
+// coarse-grain check for optional params
+
+// comes in and the user recovers from the error.
 
 // conditionals in their route config.
 
@@ -1670,6 +2130,12 @@ and limitations under the License.
 
 // css base code, injected by the css-loader
 
+// decodeURIComponent(), but we re-encode pathnames via `new URL()` so they
+
+// decodings will match exactly.
+
+// defaultMemoize now supports a configurable cache size with LRU behavior,
+
 // defaultProps, but React automatically puts defaultProps on props.
 
 // define __esModule on exports
@@ -1680,9 +2146,13 @@ and limitations under the License.
 
 // dependsOnOwnProps is used by createMapToPropsProxy to determine whether to pass props as args
 
+// difference from how <a href> works and a major reason we call this a
+
 // different options opens up some testing and extensibility scenarios
 
 // do the same (see clones[i].inject)
+
+// does, so if an app ends up at a route like /#something then we add a
 
 // don't break things.  But we need to wrap it in a try catch in case it is
 
@@ -1690,9 +2160,15 @@ and limitations under the License.
 
 // due to cross-origin restrictions
 
+// easier to handle this case. if(!global) { ...}
+
 // empty string to avoid regexp issues
 
+// enabling "pause on exceptions" in your JavaScript debugger.
+
 // encapsulates the subscription logic for connecting a component to the redux store, as
+
+// encoded here but there also shouldn't be anything to decode so this
 
 // ensure latest selected state is reused so that a custom equality function can result in identical references
 
@@ -1706,6 +2182,10 @@ and limitations under the License.
 
 // eslint-disable-next-line jsx-a11y/anchor-has-content
 
+// eslint-disable-next-line no-console
+
+// eslint-disable-next-line no-empty
+
 // eslint-disable-next-line no-extend-native
 
 // eslint-disable-next-line no-param-reassign
@@ -1714,7 +2194,11 @@ and limitations under the License.
 
 // eslint-disable-next-line prefer-destructuring
 
+// eslint-disable-next-line react-hooks/rules-of-hooks
+
 // eslint-disable-next-line react/no-danger
+
+// export from react-router
 
 // expose the module cache
 
@@ -1722,19 +2206,35 @@ and limitations under the License.
 
 // extend merge rules
 
+// find the source for a warning that appears in the console by
+
+// first, we avoid this issue
+
 // first. This allows people to have fine-grained control over the matching
 
 // fold the underlying StyledComponent rules up (implicit extend)
 
 // fold the underlying StyledComponent target up since we folded the styles
 
+// for absolute paths, ensure `/` instead of empty segment
+
 // forcing another re-render, which we don't want.
+
+// full Locations now and avoid the need to run through this flow at all
 
 // function because try/catches deoptimize in certain engines.
 
 // functions are allowed to be static if they're just being
 
+// g can still be undefined, but nothing to do about it...
+
+// generate the routePathnames input for resolveTo()
+
 // getDefaultExport function for compatibility with non-harmony modules
+
+// hash string, in which case we should assume that the navigation is relative
+
+// history-aware.
 
 // http://fb.me/prop-types-in-prod
 
@@ -1742,9 +2242,15 @@ and limitations under the License.
 
 // https://bugs.chromium.org/p/v8/issues/detail?id=4118
 
-// https://developer.mozilla.org/de/docs/Web/API/Window/popstate_event
+// https://github.com/HTTPArchive/wappalyzer/blob/main/src/technologies/r.json
 
 // https://github.com/amilajack/eslint-plugin-flowtype-errors/issues/133
+
+// https://github.com/remix-run/react-router/issues/11052#issuecomment-1836589329
+
+// https://html.spec.whatwg.org/multipage/nav-history-apis.html#shared-history-push/replace-state-steps
+
+// https://html.spec.whatwg.org/multipage/structured-data.html#structuredserializeinternal
 
 // if clearTimeout wasn't available but was latter defined
 
@@ -1756,13 +2262,23 @@ and limitations under the License.
 
 // import a list of modules into the list
 
+// in a DataStaticRouter
+
+// in a browser router.  This is particularly important when there exists a
+
 // index routes, so don't add them to the list of possible branches.
 
 // instead of using params["*"] later because it will be decoded then
 
+// is an array. In most libs I've looked at, it's an equality function or options object.
+
 // is created synchronously, otherwise a store update may occur before the
 
 // is re-rendered, the selectors are called again, and
+
+// is useless because we haven't wired up our history listener yet
+
+// is useless because we haven't wired up our router subscriber yet
 
 // istanbul ignore if
 
@@ -1770,11 +2286,23 @@ and limitations under the License.
 
 // just useEffect instead to avoid the warning, since neither will run anyway.
 
+// keep as is for the time being and just let any incoming keys take precedence
+
 // keys multiple times.
+
+// lazy, or has a loader that hasn't run yet).  Flag that we need to
+
+// leading slash so all of our path-matching behaves the same as if it would
 
 // light: '#fff',
 
-// major reason we call this a "to" value instead of a "href".
+// match only if we find the end of this path segment.  Look for an optional
+
+// match so we include splat values for "." links.  See:
+
+// match what `window.location.pathname` would reflect.  Those don't 100%
+
+// migration guide from v5 as a means of disambiguation between `to` values
 
 // mode & 1: value is a module id, require it
 
@@ -1784,23 +2312,49 @@ and limitations under the License.
 
 // mode & 8|1: behave like require
 
-// nested paths.
-
 // no consecutive self refs (.b.b); that is a precedence boost and treated differently
+
+// no-op
+
+// non-captured trailing slash (to match a portion of the URL) or the end
 
 // object and shouldComponentUpdate will always return true.
 
+// of RenderErrorBoundary
+
+// of a trailing slash on root links
+
+// of the path (if we've matched to the end).  We used to do this with a
+
+// only impacts the root matches for `RouterProvider` and no descendant
+
+// optional version for all children, so we get consistent ordering where the
+
 // options object:
+
+// or from router.navigate, but we want to match against the unencoded
+
+// otherwise it'll prepend the basename inside of the router).
+
+// outwards just like a replace call would so the dev knows the cause
+
+// parent optional aspect is preferred as required.  Otherwise, we can get
+
+// parent optional segments, where for example, /:two would explode _earlier_
 
 // parent re-rendered without this component and we're about to unmount.
 
-// parent routes to matching only their own words and nothing more, e.g. parent
+// parentPathnameBase has, instead of removing based on character count.
 
 // passed through to selectorFactory
 
+// paths in the route definitions.  Memory router locations won't be
+
 // place our cache into shared context so it'll persist between HMRs
 
-// popstate does not fire on hashchange in IE 11 and old (trident) Edge
+// pre-encode them since they might be part of a matching splat param from
+
+// previous page that didn't have an error. Because this wraps the entire
 
 // probably be avoided if Subscription's listeners logic is changed to not call listeners
 
@@ -1814,11 +2368,17 @@ and limitations under the License.
 
 // reducer returns their initial state. This effectively populates
 
+// render a fallback and render up until the appropriate fallback
+
 // return the list of modules as css string
 
-// route "/home" should not match "/home2".
+// root splat route (<Route path="*">) since that matches internally against
+
+// route context. This is explained in `Note on `<Link to>` values` in our
 
 // route tree depth-first and child routes appear before their parents in
+
+// router matches.  That means we're actively running `patchRoutesOnNavigation`
 
 // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
 
@@ -1828,7 +2388,17 @@ and limitations under the License.
 
 // shim for using process in browser
 
+// should be a safe operation.  This avoids needing matchRoutes to be
+
+// so that when we are in an error state, it gets reset when a new location
+
 // so they sort equally.
+
+// so we should render down the partial matches to the appropriate
+
+// specify a basename with a trailing slash, we should support it
+
+// src/autoBatchEnhancer.ts
 
 // src/configureStore.ts
 
@@ -1848,15 +2418,17 @@ and limitations under the License.
 
 // src/isPlainObject.ts
 
-// src/listenerMiddleware/utils.ts
-
 // src/mapBuilders.ts
 
-// src/utils.ts
+// src/matchers.ts
+
+// src/nanoid.ts
+
+// src/tsHelpers.ts
+
+// state defaults to `null` because `window.history.state` does
 
 // statically styled-components don't need to build an execution context object,
-
-// still be salvageable in the pagehide event.
 
 // stylis has no concept of state to be passed to plugins
 
@@ -1866,6 +2438,8 @@ and limitations under the License.
 
 // tags it will allow on a page
 
+// that begin with `/` and those that do not. However, this is problematic for
+
 // that child, same as if it was wrapped in React.memo() or returned false from shouldComponentUpdate.
 
 // that have been unsubscribed in the  middle of the notification loop.
@@ -1874,15 +2448,23 @@ and limitations under the License.
 
 // the "flattened" version.
 
+// the enforcement of trailing slashes throughout the app
+
 // the first self-ref is always untouched
 
 // the initial state tree.
+
+// the location changing.
 
 // the middle of the notification loop, where `subscription` will then be null. This can
 
 // the new state tree with any relevant data from the old one.
 
-// the root / URL.
+// the rollup config.
+
+// then /:one.  By always including the parent as required _for all children_
+
+// then we have _some_ form of path in our regex, so we should expect to
 
 // there should be at least two self-refs to do a replacement (.b > .b)
 
@@ -1890,17 +2472,33 @@ and limitations under the License.
 
 // these properties stay in sync with the current stylis run
 
+// this because the error provided from the app state may be cleared without
+
 // this function wraps mapToProps in a proxy function which does several things:
+
+// to creating the href.  If this is a root navigation, then just use the raw
+
+// to detect and properly classify live websites as being built with React Router:
 
 // to determine what the child props should be
 
 // to determine what the child props should be.
 
+// to handing off to history (but only if we're not in a data router,
+
 // to operate correctly into non-standard environments
+
+// to the current location's pathname and *not* the route pathname.
 
 // to the mapToProps function being wrapped. It is also used by makePurePropsSelector to determine
 
+// to use the scoped location instead of the global location.
+
+// trailing slash on root links
+
 // try...catch because iOS limits us to 100 pushState calls :/
+
+// under certain conditions, notably when serving from a local HTML file
 
 // useLayoutEffect in the browser. We need useLayoutEffect to ensure the store
 
@@ -1910,6 +2508,10 @@ and limitations under the License.
 
 // used to get the classname of a nested styled component
 
+// user called history.pushState or history.replaceState directly, in which
+
+// user-provided array of options. Otherwise, it must be just the _first_ arg, and so
+
 // v8 likes predictible objects
 
 // want them tried.
@@ -1917,6 +2519,10 @@ and limitations under the License.
 // way to warn them about it since the page will refresh...
 
 // we ignore all errors here, since when the component
+
+// we reference arguments instead of spreading them for performance reasons
+
+// we wrap it in an array so we can apply it.
 
 // webpackBootstrap
 
@@ -1926,15 +2532,21 @@ and limitations under the License.
 
 // whether mapToProps needs to be invoked when props have changed.
 
+// which allows the basename to have full control over the presence of a
+
 // which may cause missed updates; we also must ensure the store subscription
 
 // will receive the previous state. This effectively populates
 
 // will throw again, if neither props nor store state
 
+// window.location.origin is "null" (the literal string value) in Firefox
+
 // with standard React renderers (ReactDOM, React Native)
 
 // with whatever "extra arg" they want to inject into their thunks
+
+// word boundary but that gives false positives on routes like
 
 // work directly on newComer if its not an object
 
@@ -1942,9 +2554,19 @@ and limitations under the License.
 
 //# sourceMappingURL=index.js.map
 
-//# sourceMappingURL=redux-toolkit.esm.js.map
+//# sourceMappingURL=router.js.map
 
 //# sourceMappingURL=stylis.min.js.map
+
+//#endregion
+
+//#region Components
+
+//#region Hooks
+
+//#region Types and Constants
+
+//#region createStaticHandler
 
 ///////////////////////////////////////////////////////////////////////////////
 
