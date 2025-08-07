@@ -2,9 +2,9 @@
   "name": "calculator",
   "author": "Pavel Parkhomenko",
   "version": "2.0.0",
-  "description": "task calculator modsen v2",
+  "description": "task calculator",
   "private": true,
-  "homepage": "https://github.com/Pavel-Parkhomenko/Task-Calculator-Modsen-v2",
+  "homepage": "https://github.com/Pavel-Parkhomenko/Expression-Calculator",
   "keywords": [
     "react",
     "js",
@@ -13,7 +13,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Pavel-Parkhomenko/Task-Calculator-Modsen-v2.git"
+    "url": "git+https://github.com/Pavel-Parkhomenko/Expression-Calculator.git"
   },
   "license": "ISC",
   "scripts": {

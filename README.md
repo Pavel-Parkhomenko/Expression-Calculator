@@ -34,5 +34,8 @@ The application provides basic arithmetic operations, an expression builder and 
 - Real numbers can be written as 0.5 and .5
 - Operation **%** - remainder of division
 
-## Demo
-https://pavel-parkhomenko.github.io/Expression-Calculator/
+## Run
+```sh
+npm i
+npm run dev
+```
